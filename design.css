@@ -1,0 +1,1774 @@
+@font-face {
+    font-family: 'American Captain';
+    font-style: normal;
+    font-weight: normal;
+    src: url('https://db.onlinewebfonts.com/t/a6bec1c4ef2d2fd1bac5a6951f5f32a3.woff') format('woff');
+    /* La police déclare 250/1000 de jambage sous la ligne de base alors qu'elle
+       n'a que des capitales : ce vide fantôme fait remonter le texte dans son
+       bloc. On redistribue les métriques pour recentrer les capitales. */
+    ascent-override: 86.25%;
+    descent-override: 13.75%;
+    line-gap-override: 0%;
+}
+
+
+.icon img
+{
+width: 15px;
+height: 15px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  transition: border-radius 128ms var(--ease);
+  position: relative;
+}
+
+.switcheroo hr {
+display: block;
+margin: 12px 2px 2px 2px;
+height: 2px;
+background-image: linear-gradient(45deg, #cd836f, #dea450);
+border-radius: 3px;
+border: 0px solid white;
+}
+
+
+
+/*** ------------------------------- ***/
+/*** SWITCHEROO - Par Monomer ------ ***/
+/*** Gestionnaire de multicompte --- ***/
+
+:root {
+    --text: #cd836f;
+    --red: #E5C291;
+    --link: #B65E47;
+    --light: #EAD6BE;
+    --lighter: red;
+    --grey: #F3E9DD;
+    --greyer: linear-gradient(45deg, #cd836f, #dea450);
+    --border: 1px solid #cd836f;
+    --font: Verdana;
+    --gap-size: 15px;
+    --ease: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.43, 0.09, 0.38, 2.56);
+}
+
+/* BARRE SWITCHEROO --- */
+.switcheroo {}
+
+.switcheroo[position="static"] {
+  position: relative;
+}
+
+/* si barre EN HAUT */
+.switcheroo[position="top"] {
+  position: fixed;
+  top: 45;
+  left: 10;
+  z-index: 100;
+  border-radius: 15px;
+}
+
+/* si barre EN BAS */
+.switcheroo[position="bottom"] {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* si barre A L'HORIZONRAL */
+.switcheroo[direction="horizontal"] {
+  width: 100%;
+}
+
+/* si barre A LA VERTICAL */
+.switcheroo[direction="vertical"] {
+  max-height: 100%;
+}
+
+/* Positionnement des ronds */
+.switcheroo__squircles {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: var(--gap-size);
+  gap: var(--gap-size);
+}
+.switcheroo[direction="horizontal"] .switcheroo__squircles {
+  flex-direction: row;
+}
+.switcheroo[direction="vertical"] .switcheroo__squircles {
+  flex-direction: column;
+}
+
+/* BARRE --- */
+.switcheroo {
+  color: var(--color-text);
+  background-color: var(--light);
+  border: 1px solid #C38327;
+  font-size: 12px;
+}
+
+
+/* AFFICHAGE DES COMPTES ---*/
+
+/* Rond */
+.switcheroo__squircle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background-color: var(--grey);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-radius 128ms var(--ease);
+}
+
+/* Rond au survol */
+.switcheroo__squircle:hover {
+  border-radius: 6px;
+  background: var(--greyer)
+}
+
+/* Contenenur de l'avatar */
+.switcheroo__avatar {}
+
+
+/* Image de l'avatar */
+.switcheroo__avatar img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  transition: border-radius 128ms var(--ease);
+  position: relative;
+}
+
+/* Image de l'avatar au survol */
+.switcheroo__avatar img:hover {
+  border-radius: 5px;
+}
+
+/* Avatar du compte connecté */
+.switcheroo__squircle.active,
+.switcheroo__squircle.active img {
+  border-radius: 6px;
+  cursor: default;
+}
+
+
+/* Indicateur de l'avatar survolé */
+.switcheroo__squircle:before {
+  content: "";
+  display: block;
+  background-color: var(--grey);
+  border: var(--border);
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: -5px;
+  bottom: 0;
+  right: 0;
+  left: -5px;
+  z-index: -1;
+  transform 128ms var(--ease), opacity 64ms var(--ease);
+}
+
+
+/* Indicateur du compte sélectionné/actif */
+.switcheroo__squircle.active:before {
+  opacity: 1;
+  border-radius: 8px;
+}
+
+.switcheroo__squircle:hover:before {
+    border-radius: 8px;
+    opacity: 1;
+  transform 128ms var(--ease), opacity 64ms var(--ease);
+}
+
+
+/* Bouton de suppression */
+.switcheroo__delete {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: -7px;
+  right: -7px;
+  border-radius: 50%;
+  background-color: var(--red);
+  transform: scale(0);
+  opacity: 1;
+  transition: transform 128ms var(--ease), opacity 64ms var(--ease);
+  cursor: pointer;
+  color: var(--text);
+}
+.switcheroo__squircle:hover .switcheroo__delete {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+
+/* TOOLTIP - INFOBULLE DU PSEUDO ---*/
+
+/* Conteneur du pseudo */
+.switcheroo__popper {
+background-image: linear-gradient(45deg, #cd836f, #dea450);
+  padding: 5px 7px;
+  position: absolute;
+  width: -webkit-max-content;
+  width: max-content;
+  border-radius: 4px;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 64ms var(--ease), transform 128ms var(--ease-bounce);
+  pointer-events: none;
+  color: #fff;
+  font-family: Verdana;
+  font-size: 10px;
+}
+
+/* Conteneur du pseudo: si vertical */
+.switcheroo[direction="vertical"] .switcheroo__popper {
+  left: 155%;
+  top: 50%;
+  transform-origin: left;
+  transform: translateY(-50%) scale(0.98);
+}
+/* Conteneur du pseudo : si horizontal */
+.switcheroo[direction="horizontal"] .switcheroo__popper {
+  top: 155%;
+  left: 50%;
+  transform-origin: top;
+  transform: translateX(-50%) scale(0.98);
+}
+
+/* Flèche tooltip */
+.switcheroo__popper:before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: var(--text);
+  z-index: -1;
+}
+
+/* Flèche tooltip : si vertical */
+.switcheroo[direction="vertical"] .switcheroo__popper:before {
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Flèche tooltip : si horizontal */
+.switcheroo[direction="horizontal"] .switcheroo__popper:before {
+  left: 50%;
+  top: -2px;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+
+/* Positionnement tooltip au survol */
+.switcheroo[direction="vertical"] .switcheroo__squircle:hover .switcheroo__popper {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+.switcheroo[direction="horizontal"] .switcheroo__squircle:hover .switcheroo__popper {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+
+
+/* LOGO --- */
+.switcheroo__logo {
+  /* display: none */
+  /* à ajouter si vous voulez supprimer le logo*/
+}
+
+/* DIVIDER : barre de séparation --- */
+.switcheroo__divider {
+  /* display: none */
+  /* à ajouter si vous voulez supprimer le logo*/
+  
+  background-color: var(--greyer);
+  border-radius: 3px;
+  transform: scale(0.8);
+}
+
+/* Divider : si vertical */
+.switcheroo[direction="vertical"] .switcheroo__divider {
+  width: 100%;
+  height: 2px;
+}
+
+/* Divider : si horizontal */
+.switcheroo[direction="horizontal"] .switcheroo__divider {
+  width: 2px;
+}
+
+
+/* AJOUTER UN COMPTE ---*/
+
+/* button : ajouter un compte */
+.switcheroo__squircle--button {
+  transition: border-radius 128ms var(--ease);
+  color: var(--text);
+}
+.switcheroo__squircle--button:hover {
+  color: var(--light);
+  font-weight: normal;
+}
+
+
+/* MODAL : FENETRE DE CONNEXION --- */
+
+/* Fond de l'afficage connexion */
+.monomer-overlay {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  transition: 0.2s opacity ease;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Boîte de connexion */
+.monomer-modal {
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  width: 94%;
+  padding: 24px 20px;
+  transition: 0.2s opacity ease;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background: var(--grey);
+  border: var(--border);
+  color: var(--text);
+}
+
+/* Formulaire */
+.switcheroo__form {
+  padding: 48px;
+  background: var(--light);
+  border-radius: 5px;
+}
+
+/* Champs à remplir */
+.switcheroo__form-row {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+/* Nom du champs */
+.switcheroo__form-label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Zone de texte */
+.switcheroo__form-input {
+  padding: 6px;
+  font-size: 16px;
+  border-radius: 4px;
+  width: 100%;
+  background-color: var(--light);
+  border: var(--border)!important;
+  color: var(--text);
+  cursor: text;
+}
+
+/* Bouton de connexion */
+.switcheroo__form-button {
+  border-radius: 8px;
+  padding: 4px 6px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  align-self: flex-end;
+  background-color: var(--light);
+  border: var(--border);
+  cursor: pointer;
+  color: var(--text);
+}
+
+.switcheroo__form-button:hover {
+  border: 1px solid transparent;
+  background: var(--text);
+  color: var(--light);
+}
+
+.monomer-modal.monomer-open, .monomer-overlay.monomer-open {
+  opacity: 1;
+}
+
+/* Fermer la boîte de connexion */
+.monomer-close {
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+  border: 0;
+  outline: none;
+  background: var(--red);
+  border-radius: 50%;
+  padding: 0;
+}
+.monomer-close:hover {
+  background: var(--text);
+  font-weight: 700;
+}
+
+
+/* présentation */
+
+/* MISE EN PAGE SAM */
+
+.fondhaut {
+display: block;
+margin-top: 10px;
+margin-left: auto;
+margin-right: auto;
+width: 450px;
+padding: 12px;
+border: 1px solid #534730;
+background-color: #242323;
+border-radius: 5px 5px 0 0;
+}
+
+.titrehaut
+{
+font-size: 25px;
+font-family: 'American Captain',arial;
+font-weight: bolder;
+text-align: center;
+color: #c7a346;
+}
+
+.fond {
+display: block;
+width: 450px;
+margin: 0 auto;
+padding: 12px;
+border: 1px solid #534730;
+border-top: 0px solid black;
+background-color: #000000;
+}
+
+.infospres {
+display: inline-block;
+vertical-align: top;
+width: 283px;
+}
+
+f
+{
+line-height: 10px;
+background-image: linear-gradient(45deg,#C5A96B,#997b2f);
+color: #000;
+display: inline-block;
+border-radius: 3px;
+font-size: 10px;
+margin-right: 3px;
+padding: 1px 4px 1px 4px;
+text-align: center;
+text-transform: uppercase;
+font-family: 'Roboto Condensed', sans-serif;
+font-weight: bold;
+}
+
+.bloc1 {
+display: block;
+height: 210px;
+padding: 12px;
+padding-right: 10px;
+background-color: #191818;
+border: 1px solid #424242;
+overflow: auto;
+}
+
+.titrebloc1 {
+display: block;
+margin-left: 60px;
+margin-top: -5px;
+margin-bottom: 5px;
+font-size: 22px;
+font-family: 'American Captain', arial; 
+font-weight: bolder;
+background: -webkit-linear-gradient(180deg, #C5A96B, #997b2f); 
+-webkit-background-clip: text; 
+-webkit-text-fill-color: transparent; 
+}
+
+.titrebloc2 {
+display: block;
+margin-right: 60px;
+margin-top: -5px;
+margin-bottom: 5px;
+font-size: 22px;
+font-family: 'American Captain', arial; 
+font-weight: bolder;
+background: -webkit-linear-gradient(180deg, #C5A96B, #997b2f); 
+-webkit-background-clip: text; 
+-webkit-text-fill-color: transparent; 
+text-align: right;
+}
+
+.titrebloc3 {
+display: block;
+margin-left: 20px;
+margin-bottom: -12px;
+font-size: 16px;
+font-family: 'American Captain', arial; 
+font-weight: bolder;
+background: -webkit-linear-gradient(180deg, #C5A96B, #997b2f); 
+-webkit-background-clip: text; 
+-webkit-text-fill-color: transparent; 
+}
+
+.bloc2 {
+display: block;
+height: 100px;
+padding: 12px;
+background-color: #191818;
+border: 1px solid #424242;
+overflow: auto;
+}
+
+.bloc3 {
+display: block;
+padding: 12px;
+background-color: #191818;
+border: 1px solid #424242;
+}
+
+.avatarpres1 {
+display: inline-block;
+width: 140px;
+margin-left: 15px;
+position: relative;
+vertical-align: top;
+background-color: #191818;
+border: 1px solid #424242;
+padding: 5px;
+}
+
+.avatarpres2 {
+display: inline-block;
+width: 140px;
+margin-right: 15px;
+position: relative;
+vertical-align: top;
+background-color: #191818;
+border: 1px solid #424242;
+padding: 5px;
+}
+
+.avatarpres1 img {
+width: 140px;
+height: 224px;
+}
+
+.avatarpres2 img {
+width: 140px;
+height: 224px;
+}
+
+.iconpv {
+display: inline-block;
+height: 100px;
+width: 100px;
+position: relative;
+vertical-align: top;
+background-color: #191818;
+border: 1px solid #424242;
+padding: 5px;
+}
+
+.iconpv img {
+width: 100px;
+}
+
+.infosplay {
+display: inline-block;
+vertical-align: top;
+width: 337px;
+}
+
+.bloc4 {
+display: block;
+height: 86px;
+padding: 12px;
+padding-right: 10px;
+background-color: #191818;
+border: 1px solid #424242;
+overflow: auto;
+margin-left: 15px;
+}
+
+.bloc5 {
+display: block;
+padding: 12px;
+background-color: #191818;
+border: 1px solid #424242;
+}
+
+.blocky {
+display: block;
+padding: 12px;
+background-color: #191818;
+border: 1px solid #424242;
+}
+
+.pic
+{
+display: block;
+width: 275px;
+text-align: center;
+padding: 12px;
+margin: auto;
+margin-bottom: 6px;
+border: 1px solid #424242;
+background-color: #000000;
+}
+
+.pvend {
+display: block;
+font-size: 9.5px;
+text-align: center;
+padding: 5px;
+color: #606060;
+font-style: italic;
+}
+
+/* PROFILS */
+.profilentier {
+display: block;
+margin: auto;
+padding: 4px;
+margin-top: 8px;
+margin: 5px;
+}
+
+/* Dégradé doré en remplissage de texte, comme .titrebloc1 / .titrehaut */
+.profilpseudo {
+display: block;
+max-width: 100%;
+font-size: 22px;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+line-height: 24px;
+color: #C5A96B;
+background: linear-gradient(180deg, #E5C9A0, #997b2f);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+/* Garde-fou : un pseudo très long est tronqué plutôt que passé sur 2 lignes */
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* Rang natif inutilisé : remplacé par le Nickname (voir .profilnickname) */
+.profilrang {
+display: none;
+}
+
+/* Pseudo + nickname, centrés dans l'espace entre l'avatar et les onglets */
+.profiltop {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+min-height: 62px;
+margin: 0;
+padding: 8px 2px;
+border: 0;
+background: none;
+border-radius: 0;
+text-align: center;
+}
+
+.profilnickname {
+display: block;
+position: relative;
+margin-top: 8px;
+padding-top: 8px;
+max-width: 100%;
+color: #756e6e;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 10px;
+font-weight: bold;
+line-height: 12px;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+}
+
+/* Filet doré entre le pseudo et l'identité secrète */
+.profilnickname:before {
+content: "";
+position: absolute;
+top: 0;
+left: 50%;
+width: 34px;
+height: 2px;
+margin-left: -17px;
+border-radius: 2px;
+background-image: linear-gradient(45deg, #C5A96B, #997b2f);
+}
+
+.profilavatar {
+display: block;
+padding: 12px;
+margin: auto;
+border: 1px solid #424242;
+background-color: #000;
+}
+
+.profilboxinfo {
+display: block;
+text-align: justify;
+padding: 10px;
+border: 1px solid #424242;
+background-color: #000;
+margin-bottom: 2px;
+overflow-y: auto;
+max-height: 300px;
+}
+
+.profilboxinfo img {
+display: block;
+max-width: 98%;
+margin: auto;
+}
+
+.fieldprof {
+background-image: linear-gradient(45deg,#C5A96B,#997b2f);
+color: #000;
+display: inline-block;
+border-radius: 3px;
+font-size: 10px;
+margin-right: 3px;
+padding: 1px 2px 1px 4px;
+text-align: center;
+text-transform: uppercase;
+line-height: 7px;
+font-family: 'Roboto Condensed', sans-serif;
+font-weight: bold;
+}
+
+.profsize img{
+max-width: 250px;
+}
+
+
+/* PROFIL À ONGLETS (systab) --------------------------------------------- */
+/* La barre et les panneaux sont construits par profil-onglets.js.
+   Avant son exécution, .systab n'a pas la classe --pret : les champs
+   s'affichent alors à la suite, sans onglets, plutôt que de disparaître. */
+
+.systab {
+display: block;
+}
+
+.systab-nav {
+display: flex;
+gap: 4px;
+margin-bottom: 8px;
+}
+
+.systab-onglet {
+flex: 1 1 0;
+min-width: 0;
+padding: 3px 4px 4px;
+border-radius: 3px;
+background-color: #191818;
+border: 1px solid #424242;
+color: #756e6e;
+font-family: 'Roboto Condensed', sans-serif;
+font-weight: bold;
+font-size: 13px;
+line-height: 16px;
+letter-spacing: .5px;
+text-align: center;
+text-transform: uppercase;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+cursor: pointer;
+transition: all .25s ease-in;
+}
+
+.systab-onglet:hover {
+color: #C5A96B;
+border-color: #756e6e;
+}
+
+.systab-onglet.selected {
+background-image: linear-gradient(45deg, #C5A96B, #997b2f);
+border-color: #C5A96B;
+color: #000;
+cursor: default;
+}
+
+/* Un onglet dont aucun champ n'est rempli n'a pas lieu d'être cliquable */
+.systab-onglet.systab-vide {
+display: none;
+}
+
+/* Hauteur fixe et identique pour tous les onglets et tous les messages :
+   passer d'un onglet à l'autre ne fait plus varier la taille du profil. */
+.systab-panneau {
+display: none;
+height: 235px;
+overflow-y: auto;
+padding-right: 4px;
+}
+
+.systab-panneau.selected {
+display: block;
+}
+
+.systab .infos-posteur {
+margin-bottom: 5px;
+}
+
+/* Champ sans titre (type d'affichage "icône" sans URL) : Forumactif génère
+   un <span class="label"></span> vide, qu'il ne faut surtout pas décorer. */
+.systab .profil_label .label:empty,
+.systab .profil_label > span:empty,
+.systab .infos-posteur.sans-label .profil_label {
+display: none;
+}
+
+.systab .profil_label .label,
+.systab .profil_label > span {
+background-image: linear-gradient(45deg, #C5A96B, #997b2f);
+color: #000;
+display: inline-block;
+border-radius: 3px;
+font-size: 10px;
+margin-right: 6px;
+padding: 2px 5px;
+text-align: center;
+text-transform: uppercase;
+line-height: 10px;
+font-family: 'Roboto Condensed', sans-serif;
+font-weight: bold;
+}
+
+
+/* index */
+.lastpost {
+width: 215px;
+height: 90px;
+margin-left: 50px;
+text-align: center;
+line-height: 14px;
+}
+
+.lastpostframe
+{
+display: block;
+padding: 4px;
+width: 140px;
+}
+
+.stats
+{
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 9px;
+text-align: center;
+margin-top: 3px;
+}
+
+.stats span
+{
+font-weight: bold;
+color: #C5A96B;
+}
+
+.lastavatarframe
+{
+margin-right: 7px;
+display: block;
+height: 80px;
+width: 50px;
+}
+
+.lastpost-avatar img 
+{
+height: 80px;
+width: 50px;
+padding: 4px;
+border: 1px #373737 solid;
+background-color: #222222;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+}
+
+.newnonew {
+display: inline-block;
+width: 40px;
+text-align: center;
+margin-left: -15px;
+margin-right: 15px;
+}
+
+.newnonew img {
+width: 40px;
+}
+
+.forumdesc {
+text-align:justify;
+margin-bottom: 15px;
+padding: 10px;
+padding-top: 5px;
+padding-right: 60px;
+}
+
+.forumdesc strong {
+    background-image: linear-gradient(45deg,#C5A96B,#997b2f);
+    color: #000;
+    display: inline-block;
+    border-radius: 3px;
+    font-size: 9px;
+    margin-right: 3px;
+    padding: 2px 6px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 7px;
+font-family: 'Roboto Condensed', sans-serif;
+font-weight: bold;
+}
+
+.forumlastpost {
+display: inline-block;
+width: 150px;
+text-align: center;
+font-size: 10px;
+}
+
+a.forumlink {
+display: inline-block;
+margin-left: 30px;
+padding: 2px;
+margin-top: 5px;
+font-size: 23px;
+font-family: 'American Captain', arial; 
+font-weight: bolder;
+letter-spacing: 0px;
+}
+
+a.forumlink:hover {
+-webkit-transition: all .2s ease-in;
+-moz-transition: all .2s ease-in;
+-o-transition: all .2s ease-in;
+transition: all .2s ease-in;
+}
+
+.sous_forum a {
+color: #C7A346;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 12px;
+text-transform: uppercase;
+display: inline-block;
+font-weight: bold;
+margin-top: 5px;
+margin-left: 10px;
+margin-right: 10px;
+moz-transition: all .3s;
+-o-transition: all .3s;
+-webkit-transition: all .3s;
+}
+
+.sous_forum a:hover {
+color: #C5A96B;
+moz-transition: all .3s;
+-o-transition: all .3s;
+-webkit-transition: all .3s;
+}
+
+.forumline
+{
+border: 1px solid #424242;
+margin-top: 15px;
+background-color: #2e2d2d;
+}
+
+.secondarytitle h2 {
+color: #c5a96b;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 16px;
+text-transform: uppercase;
+font-weight: bold;
+text-shadow: 0px 0px 5px #000;
+}
+
+th {
+height: 40px;
+background-color: #2e2d2d;
+margin-top: 10px;
+}
+
+th.thHead
+{
+vertical-align: middle!important;
+}
+
+#sceditor_smilies
+{
+background-color: transparent!important;
+}
+
+#profile-advanced-details img {
+max-width: 300px;
+}
+
+/* Haut du forum */
+
+#i_logo {
+margin-left:-10px;
+margin-right: -10px;
+margin-top: -14px;
+background-position: top-center; 
+}
+
+#header {
+    background-image: var(--header);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 800px;
+    height: 400px;
+    display: block;
+}
+
+.maintitle {
+margin-top: -40px;
+}
+
+a.mainmenu {
+display: inline-block;
+text-align: center;
+margin-bottom: 20px;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 12px;
+text-transform: uppercase;
+font-weight: bold;
+}
+
+a.mainmenu:hover {
+}
+
+/* pas de faq dans le menu */
+#i_icon_mini_search {
+margin-left: -10px;
+}
+
+
+/*QEEL*/
+
+.qeeltitle {
+width: 776px;
+margin-top: 20px;
+padding-top: 10px;
+text-align: center;
+border: 2px solid #2e2d2d;
+border-bottom: 1px solid #2e2d2d;
+height: 30px;
+background-color: #2e2d2d;
+color: #c5a96b;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 16px;
+text-transform: uppercase;
+font-weight: bold;
+text-shadow: 0px 0px 5px #000;
+}
+
+/* Conteneur des 3 colonnes */
+.qeeltable{
+background-color: #191818;
+border-left: 2px solid #2e2d2d;
+border-right: 2px solid #2e2d2d;
+border-bottom: 2px solid #2e2d2d;
+color: #827E7E;
+font-family: verdana, arial;
+font-size: 11px;
+padding: 15px;
+width: 746px;
+display: flex;
+align-items: stretch;
+justify-content: center;
+gap: 15px;
+}
+
+/* --- Colonne de gauche : stats + membres en ligne --- */
+/* flex-basis 0 sur gauche + droite = les deux colonnes se partagent
+   à parts égales la place restante, quel que soit leur contenu */
+.qeelleft
+{
+flex: 1 1 0;
+min-width: 0;
+text-align: justify;
+}
+
+/* Intitulé de section : même typo dorée que les titres du forum */
+.qeelsub {
+display: block;
+margin-top: 14px;
+margin-bottom: 5px;
+padding-bottom: 3px;
+color: #c7a346;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+font-size: 15px;
+letter-spacing: .5px;
+text-align: left;
+text-transform: uppercase;
+border-bottom: 1px solid #2e2d2d;
+}
+
+.qeeltable > div > .qeelsub:first-child {
+margin-top: 0;
+}
+
+/* Variante sur une seule ligne : intitulé à gauche, valeur à droite */
+.qeelsub-inline {
+display: flex;
+align-items: baseline;
+justify-content: space-between;
+gap: 10px;
+}
+
+.qeelsub-inline #dernier_membre {
+flex: 0 1 auto;
+min-width: 0;
+color: #C5A96B;
+font-family: verdana, arial;
+font-size: 11px;
+font-weight: bold;
+letter-spacing: 0;
+text-transform: none;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* Contenu posé directement sur le fond, sans encadré */
+.qeelresume,
+.qeelonline,
+.qeelnewmember,
+.qeellast {
+display: block;
+line-height: 15px;
+}
+
+.qeelonline {
+max-height: 58px;
+overflow-y: auto;
+padding-right: 4px;
+}
+
+/* Occupe toute la place restante entre la recrue et les groupes,
+   et défile dès que la liste dépasse cet espace */
+.qeellast {
+flex: 1 1 0;
+min-height: 55px;
+overflow-y: auto;
+padding-right: 4px;
+}
+
+/* --- Colonne centrale : avatar du dernier inscrit --- */
+/* Séparateurs discrets : ils structurent les 3 colonnes sans rien encadrer */
+.qeelmiddle {
+flex: 0 0 110px;
+text-align: center;
+padding: 0 15px;
+border-left: 1px solid #2e2d2d;
+border-right: 1px solid #2e2d2d;
+}
+
+/* Même cadre que les avatars des derniers messages (.lastpost-avatar) */
+span#avatar_dernier_membre {
+display: block;
+background-color: #222222;
+border: 1px solid #373737;
+border-radius: 3px;
+padding: 4px;
+min-height: 100px;
+}
+
+span#avatar_dernier_membre img {
+display: block;
+width: 100%;
+height: auto;
+max-width: 100%;
+opacity: .75;
+-webkit-transition: all .3s ease-in;
+transition: all .3s ease-in;
+}
+
+span#avatar_dernier_membre img:hover {
+opacity: 1;
+}
+
+/* --- Colonne de droite : dernier inscrit + 72h + groupes --- */
+.qeelright {
+flex: 1 1 0;
+min-width: 0;
+text-align: justify;
+display: flex;
+flex-direction: column;
+}
+
+.qeelnewmember {
+color: #C5A96B;
+}
+
+.qeellast table#lastconnected {
+width: 100%;
+border: 0;
+border-collapse: collapse;
+}
+
+.qeellast td.row1,
+#lastconnected td.row1
+{
+background-color: transparent !important;
+background-image: none !important;
+border: 0 !important;
+padding: 0 !important;
+}
+
+#lastconnected td.row1 .gensmall
+{
+color: #827E7E;
+font-family: verdana, arial;
+font-size: 11px;
+line-height: 15px;
+}
+
+/* --- Groupes --- */
+/* nowrap + flex:1 1 0 sur les boîtes = une seule ligne,
+   largeurs strictement égales, occupant toute la colonne */
+/* margin-top auto = collées au bas de la colonne */
+.groupes {
+display: flex;
+flex-wrap: nowrap;
+gap: 6px;
+margin-top: auto;
+padding-top: 10px;
+}
+
+.gpcolor {
+flex: 1 1 0;
+min-width: 0;
+height: 20px;
+line-height: 20px;
+color: #000000;
+border-radius: 3px;
+font-size: 15px;
+text-align: center;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.gp1 {
+background-color: #A66530;
+}
+
+.gp2 {
+background-color: #946D61;
+}
+
+.gp3 {
+background-color: #B78B3F;
+}
+
+.gp4 {
+background-color: #95a362;
+}
+
+/*FIN QEEL*/
+
+
+/*SOULIGNEMENT*/
+a {text-decoration: none !important;}
+a:hover {text-decoration: none !important;}
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:active {text-decoration: none;}
+
+/* SUJETS */
+.postbody {
+display: block;
+padding-left: 20px;
+padding-right: 20px;
+padding-bottom: 30px;
+padding-top: 10px;
+text-align: justify;
+}
+
+.postbody img{
+max-width: 400px;
+}
+
+u {
+text-decoration: none;
+border-bottom: 2px solid #C5A96B;
+}
+
+.park {
+font-weight: bold;
+color: #A0814A;
+}
+
+.wren {
+font-weight: bold;
+color: #cc3333;
+}
+
+td.catHead
+{
+border: 0px solid white;
+background-color: #424242;
+}
+
+td.catBottom
+{
+border: 0px solid white;
+padding-left: 10px;
+}
+
+td.row3Right {
+border: 0px solid white;
+}
+
+dd.quote
+{
+padding: 10px;
+color: #827E7E;
+text-align: justify;
+font-size: 10px;
+margin: auto;
+line-height: 14px;
+border: 1px solid #2e2d2d;
+background-color: #000;
+margin-bottom: 10px;
+}
+
+dd.code{
+padding: 10px;
+color: #827E7E;
+text-align: justify;
+font-size: 10px;
+margin: auto;
+line-height: 12px;
+border: 1px solid #2e2d2d;
+background-color: #000;
+margin-bottom: 10px;
+width: 400px;
+}
+
+.selectCode { 
+float: right; 
+cursor: pointer; 
+color: #A0814A; 
+font-weight: bold!important;
+text-decoration: none;
+margin-right: 12px;
+text-transform: uppercase;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 10px;
+text-align: center;
+}
+
+.selectCode:hover { 
+color: #C5A96B;
+}
+
+div.cont_code { clear: right; }
+
+textarea, select {
+border: 1px solid #2e2d2d!important;
+color: #827E7E!important;
+}
+
+/* Forumactif force .sceditor-container à #FFFFFF !important dans l'en-tête
+   généré de la feuille de style : sans !important ici, la valeur est ignorée. */
+.sceditor-container,
+.sceditor-container iframe,
+.sceditor-container textarea {
+background-color: #191818!important;
+}
+
+.sceditor-container {
+border: 1px solid #2e2d2d!important;
+}
+
+div.sceditor-toolbar {
+border-bottom: 1px solid black!important;
+background-color: #232222!important;
+}
+
+div.sceditor-button {
+background: #2e2d2d!important;
+}
+
+a.sceditor-button.sceditor-button-source.hover {
+color: transparent;
+}
+
+div.sceditor-dropdown {
+background-color: black!important;
+}
+
+div.sceditor-group {
+background: #2e2d2d!important;
+border-bottom: 1px solid #474747!important;
+}
+
+input {
+border: 1px solid #A0814A;
+background-color: #000!important;
+padding-right: 12px;
+padding-left: 12px;
+padding-top: 4px;
+padding-bottom: 4px;
+border-radius: 6px;
+}
+
+input:hover {
+border: 1px solid #C5A96B;
+}
+
+tr.post span.gensmall { display: none; }
+
+/* Page d'accueil */
+.bodypa {
+width: 750px;
+margin-top: 50px;
+}
+
+.paimg img {
+display: block;
+height: 100px;
+margin-top: 10px;
+}
+
+.palinkbloc
+{
+display: block;
+margin: auto;
+margin-top: 5px;
+margin-bottom: 20px;
+}
+
+a.palink1
+{
+display: inline-block;
+margin: 4px;
+background-color: #C5A96B;
+width: 113px;
+height: 19px;
+line-height: 19px;
+color: #000000;
+border-radius: 3px;
+font-size: 14px;
+text-align: center;
+font-family: 'American Captain', arial; 
+font-weight: bolder;
+/*background: #C5A96B;*/
+}
+
+a.palink2 {
+display: inline-block;
+margin: 4px;
+background: #997b2f;
+width: 100px;
+height: 19px;
+line-height: 19px;
+color: #000000;
+border-radius: 3px;
+font-size: 14px;
+text-align: center;
+font-family: 'American Captain', arial; 
+font-weight: bolder;
+}
+
+.patitle {
+margin-top: 5px;
+margin-bottom: 5px;
+color: #c7a346;
+font-size: 20px;
+font-family: 'American Captain', arial; 
+font-weight: bolder;
+text-align: center;
+}
+
+.paleft {
+display: block;
+width: 350px;
+text-align: justify;
+font-size: 10px;
+margin-top: 20px;
+margin-left: 65px;
+}
+
+.paright {
+display: block;
+width: 190px;
+text-align: justify;
+font-size: 10px;
+margin-top: 20px;
+margin-right: 70px;
+}
+
+.paleft a
+{
+font-weight: bold;
+}
+
+.paright a
+{
+font-weight: bold;
+}
+
+.pasurvol
+{
+display: inline-block;
+width: 50px;
+margin: 3px;
+cursor: pointer;
+}
+
+.pasurvol img {
+max-width: 100%;
+}
+
+.pastaff {
+display: inline-block;
+width: 150px;
+float: right;
+text-align: justify;
+}
+
+.panext {
+display: inline-block;
+margin-top: 1px;
+width: 150px;
+}
+
+.staffleft {
+display: inline-block;
+}
+
+.staffright {
+margin-bottom: 15px;
+}
+
+.staffleft img{
+height: 40px;
+width: auto;
+opacity: 0.8;
+display: inline-block;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+transition: all .3s ease-in;
+margin: 0px 2px;
+}
+
+.staffleft img:hover {
+opacity: 1;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+transition: all .3s ease-in;
+}
+
+/* DEBUT SELECTOR */
+.styled-select {
+text-align: center;
+font-size: 10px;
+background-color: #191818;
+color: #756e6e;
+border: 1px solid #756e6e;
+text-align: center;
+width: 180px;
+margin: auto;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+.styled-select select {
+background: transparent;
+border: none;
+font-size: 10px;
+height: 25px;
+width: 180px;
+text-align: center;
+}
+/* FIN SELECTOR */
+
+/* bottin */
+
+.bottin {
+padding-left: 50px;
+padding-right: 50px;
+text-align: justify;
+}
+
+.alphabet {
+margin-left: 40px;
+margin-bottom: -10px;
+margin-top: 5px;
+display: block;
+font-size: 14px;
+line-height: 16px;
+width: 60px;
+background-image: linear-gradient(45deg,#C5A96B,#997b2f);
+color: #000;
+border-radius: 3px;
+padding: 2px 4px;
+text-align: center;
+text-transform: uppercase;
+font-family: 'Roboto Condensed', sans-serif;
+font-weight: bold;
+}
+
+/*======SCROLLBAR======*/
+/*modifier l'apparence des scrollbars de tout le forum*/
+::-webkit-scrollbar 
+{
+  width: 4px; /*largeur de la scrollbar verticale*/
+  height: 4px; /*hauteur de la scrollbar horizontale*/
+}
+
+::-webkit-scrollbar-track 
+{
+  background-color: transparent; /*couleur du fond de la scrollbar*/
+}
+
+::-webkit-scrollbar-thumb 
+{ /*la petite bande qui monte/descend*/
+background-image: linear-gradient(#C5A96B,#997b2f);
+}
+
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/* TOOLBAR */
+span#fa_share {display:none!important;}
+span#fa_left {display:none!important;}
+div#fa_search {display:none!important;}
+div#fa_textarea {display:none!important;}
+
+#fa_toolbar {
+color: #c7a346;
+background-color: #191818;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 12px!important;
+text-transform: uppercase;
+font-weight: bold;
+border-bottom: 1px solid #534730;
+}
+
+#fa_menulist {
+background-color: #191818;
+color: #c7a346;
+}
+
+#fa_welcome, #fa_notifications {
+background-color: transparent!important;
+}
+
+#fa_notifications, #fa_right {
+padding-right: 10px!important;
+}
+
+#fa_usermenu {
+color: #c7a346;
+font-size: 10px;
+}
+
+#fa_menulist :link, #fa_menulist :visited {
+color: #c7a346!important;
+font-size: 10px;
+}
+
+li.fa_separator {
+background-color: #242323!important;
+}
+
+li.see_all {
+background-color: #191818!important;
+color: #c7a346!important;
+font-size: 12px!important;
+}
+
+div.contentText.ellipsis
+{
+color: #827e7e!important;
+text-transform: initial;
+}
+
+a.contentText.ellipsis 
+{
+color: #C5A96B!important;
+}
+
+ul#notif_list {
+background-color: #242323!important;
+}
+
+#fa_usermenu img {
+    width: 100px;
+}
+
+#fa_toolbar #fa_right #notif_list li.see_all a {
+color: #c7a346;
+}
+
+#fa_toolbar #fa_right #notif_list li .contentText a {
+color: #C5A96B!important;
+}
