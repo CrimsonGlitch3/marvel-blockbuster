@@ -83,7 +83,7 @@ display: block;
 margin-left: 60px;
 margin-top: -5px;
 margin-bottom: 5px;
-font-size: 22px;
+font-size: 24px;
 font-family: 'American Captain', arial; 
 font-weight: bolder;
 background: -webkit-linear-gradient(180deg, #C5A96B, #997b2f); 
@@ -96,7 +96,7 @@ display: block;
 margin-right: 60px;
 margin-top: -5px;
 margin-bottom: 5px;
-font-size: 22px;
+font-size: 24px;
 font-family: 'American Captain', arial; 
 font-weight: bolder;
 background: -webkit-linear-gradient(180deg, #C5A96B, #997b2f); 
@@ -109,7 +109,7 @@ text-align: right;
 display: block;
 margin-left: 20px;
 margin-bottom: -12px;
-font-size: 16px;
+font-size: 20px;
 font-family: 'American Captain', arial; 
 font-weight: bolder;
 background: -webkit-linear-gradient(180deg, #C5A96B, #997b2f); 
@@ -376,7 +376,7 @@ flex: 1 1 0;
 min-width: 0;
 /* Padding symétrique : l'ancien 3px/4px compensait les métriques décalées
    d'American Captain, inutile depuis le passage à Roboto Condensed. */
-padding: 2px 4px;
+padding: 0px 4px;
 border-radius: 3px;
 background-color: #191818;
 border: 1px solid #424242;
@@ -930,6 +930,28 @@ max-width: 400px;
 u {
 text-decoration: none;
 border-bottom: 2px solid #C5A96B;
+}
+
+/* Passage important dans le corps d'un message.
+   Volontairement NI doré NI souligné : le forum réserve déjà le doré aux
+   liens (#C7A346, sans soulignement) et le soulignement doré à la balise <u>
+   juste au-dessus. Reprendre l'un ou l'autre rendrait un .focus indiscernable
+   d'un lien. Un texte plus clair que le gris courant, posé sur un lavis doré
+   translucide, se lit comme un surlignage au marqueur : repérable au survol
+   de la page, sans casser la lecture ni imiter un élément cliquable.
+   box-decoration-break: clone est indispensable — 3 des 10 passages du
+   contexte courent sur plusieurs lignes, et sans lui le lavis et le padding
+   ne s'appliqueraient qu'au premier fragment. */
+.focus {
+color: #CCC4B8;
+background-image: linear-gradient(
+    180deg,
+    rgba(197, 169, 107, 0) 55%,
+    rgba(197, 169, 107, .22) 55%
+);
+padding: 0 3px;
+-webkit-box-decoration-break: clone;
+box-decoration-break: clone;
 }
 
 .park {
