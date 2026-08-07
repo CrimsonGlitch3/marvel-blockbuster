@@ -634,6 +634,19 @@ max-width: 300px;
 
 /* Haut du forum */
 
+/* Largeur de page verrouillée.
+   Le gabarit Forumactif est une table de 800px (table.bodylinewidth) dont la
+   cellule .bodyline a 10px de padding : la zone de contenu fait donc 780px
+   partout sur le forum. Mais cette table se dimensionne sur son contenu, et
+   le formulaire de réponse a une largeur minimale de 784px : la page passait
+   alors à 804px, dépassant de 2px de chaque côté le bandeau (#i_logo, 800px)
+   et laissant apparaître deux bandes noires.
+   On fige donc la zone de contenu à sa valeur nominale. Sur toutes les autres
+   pages la règle est sans effet, elles y sont déjà. */
+#page-body {
+width: 780px;
+}
+
 #i_logo {
 margin-left:-10px;
 margin-right: -10px;
@@ -1348,4 +1361,30 @@ color: #c7a346;
 
 #fa_toolbar #fa_right #notif_list li .contentText a {
 color: #C5A96B!important;
+}
+
+/* test pseudo PNJ */
+a[href^="/u"] span[style*="#9B4DCA"] {
+    background: linear-gradient(
+        90deg,
+        #8b1e3f,
+        #d14d72,
+        #8c52ff,
+        #4169e1,
+        #8b1e3f
+    );
+    background-size: 300% 100%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent !important;
+
+    display: inline-block;
+    animation: pseudo-gradient 6s linear infinite;
+}
+
+@keyframes pseudo-gradient {
+    from { background-position: 0% 50%; }
+    to   { background-position: 300% 50%; }
 }
