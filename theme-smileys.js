@@ -1,25 +1,34 @@
 /* ==========================================================================
-   PANNEAU SMILEYS DE LA PAGE DE RÉPONSE
+   PANNEAU SMILEYS (page de réponse ET réponse rapide)
    --------------------------------------------------------------------------
-   Le panneau "Voir plus de smileys" sous la zone de saisie est un iframe
-   séparé (/smilies?mode=smilies_frame) qui charge sa PROPRE feuille de style
-   Forumactif, différente de celle du reste du site (22-ltr.css au lieu de
-   1-ltr.css). Ni le CSS du site ni un script limité à la page parente n'y
-   ont accès par les moyens habituels — d'où ce fichier séparé, indépendant
-   de la façon dont le CSS principal est chargé (CDN ou collé sur le forum).
+   Le sélecteur de smileys est un iframe séparé (/smilies?mode=smilies_frame)
+   qui charge sa PROPRE feuille de style Forumactif, différente de celle du
+   reste du site (22-ltr.css au lieu de 1-ltr.css). Ni le CSS du site ni un
+   script limité au document principal n'y ont accès par les moyens
+   habituels — d'où ce fichier séparé, indépendant de la façon dont le CSS
+   principal est chargé (CDN ou collé sur le forum).
 
-   On injecte donc un thème directement dans le document de l'iframe, et on
-   ré-injecte à chaque rechargement : le menu déroulant de catégorie soumet
-   un formulaire qui recharge le cadre, ce qui perdrait le style injecté sans
-   ce ré-armement.
+   Deux endroits différents utilisent cet iframe, avec un cycle de vie
+   différent :
+     - la page de réponse classique (posting.php) : l'iframe existe déjà
+       dans le HTML au chargement de la page ;
+     - la réponse rapide en bas d'un sujet : l'iframe n'existe pas au
+       chargement, elle est créée dynamiquement par SCEditor seulement quand
+       on clique sur le bouton smiley de la barre d'outils.
+   On détecte donc TOUTE iframe de smileys par son attribut src (peu importe
+   son conteneur ou son id), à la fois celles déjà présentes et celles
+   ajoutées plus tard via un MutationObserver. Et comme le menu déroulant de
+   catégorie recharge l'iframe (donc reset son contenu), on réinjecte le
+   thème à chaque évènement 'load', pas seulement à la création.
 
-   Attention à ne PAS ajouter color-scheme:dark ici : ça pousse Chromium à
-   re-thématiser lui-même le <select> et écrase nos couleurs — appearance:
-   none en !important suffit et donne un rendu correct.
+   Attention à ne PAS ajouter color-scheme:dark dans le CSS injecté : ça
+   pousse Chromium à re-thématiser lui-même le <select>, ce qui écrase nos
+   couleurs. appearance: none en !important suffit et donne un rendu correct.
    ========================================================================== */
 
 (function () {
-  function themerSmileys(doc) {
+
+  function themerDocument(doc) {
     if (!doc || !doc.head || doc.getElementById('theme-smilies')) return;
     var style = doc.createElement('style');
     style.id = 'theme-smilies';
@@ -42,22 +51,45 @@
     doc.head.appendChild(style);
   }
 
-  function surveillerSmileys() {
-    var conteneur = document.getElementById('smileyContainer');
-    if (!conteneur) return;
-    var cadre = conteneur.querySelector('iframe');
-    if (!cadre) return;
+  function estIframeSmileys(cadre) {
+    return cadre.tagName === 'IFRAME' &&
+           /\/smilies(\?|$)/.test(cadre.getAttribute('src') || '');
+  }
 
+  function surveillerIframe(cadre) {
     cadre.addEventListener('load', function () {
-      try { themerSmileys(cadre.contentDocument); }
+      try { themerDocument(cadre.contentDocument); }
       catch (e) { /* cross-origin improbable ici, on abandonne sans bruit */ }
     });
-    try { themerSmileys(cadre.contentDocument); } catch (e) {}
+    try { themerDocument(cadre.contentDocument); } catch (e) {}
+  }
+
+  function demarrer() {
+    /* Iframes déjà présentes (page de réponse classique) */
+    document.querySelectorAll('iframe').forEach(function (cadre) {
+      if (estIframeSmileys(cadre)) surveillerIframe(cadre);
+    });
+
+    /* Iframes créées plus tard (popup de la réponse rapide, au clic) */
+    var observateur = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (noeud) {
+          if (noeud.nodeType !== 1) return;
+          if (estIframeSmileys(noeud)) { surveillerIframe(noeud); return; }
+          if (!noeud.querySelectorAll) return;
+          noeud.querySelectorAll('iframe').forEach(function (cadre) {
+            if (estIframeSmileys(cadre)) surveillerIframe(cadre);
+          });
+        });
+      });
+    });
+    observateur.observe(document.body, { childList: true, subtree: true });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', surveillerSmileys);
+    document.addEventListener('DOMContentLoaded', demarrer);
   } else {
-    surveillerSmileys();
+    demarrer();
   }
+
 })();
