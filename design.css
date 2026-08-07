@@ -1526,9 +1526,13 @@ span.group-6,
    Case à cocher : un <input type="checkbox"> ne se sauvegarde nulle part,
    il redevient décoché au moindre rechargement et n'est visible que dans le
    navigateur de celui qui clique — inutilisable pour qu'un staff voie la
-   progression. La coche est donc un simple caractère (☐ / ☑) que le membre
+   progression. La coche est donc du texte brut ([ ] / [X]) que le membre
    remplace à la main en éditant son message : l'état est alors écrit dans
-   le message lui-même, donc visible en permanence par tout le monde. */
+   le message lui-même, donc visible en permanence par tout le monde.
+   Du texte brut, pas un caractère Unicode ☐/☑ : l'éditeur Forumactif
+   convertit certains caractères spéciaux en émoji au moment du post, ce qui
+   rendait la coche cochée illisible. [ ] / [X] est de l'ASCII pur, aucune
+   conversion possible. */
 .todointro {
     font-family: Verdana, sans-serif;
     font-size: 11px;
@@ -1555,8 +1559,10 @@ span.group-6,
 }
 
 .todocheck {
-    font-size: 15px;
-    line-height: 1;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5;
     color: #c7a346;
     flex-shrink: 0;
 }
