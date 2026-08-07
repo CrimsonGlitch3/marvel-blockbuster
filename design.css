@@ -1392,6 +1392,52 @@ color: #c7a346;
 color: #C5A96B!important;
 }
 
+/* PANNEAU DES NOTIFICATIONS DÉPLIÉ -----------------------------------------
+   Forumactif dessine ce panneau pour un thème clair : la liste est blanche,
+   les notifications non lues sont sur un gris clair #e5e5e5, les séparateurs
+   sont en #ccc et le libellé « Notifications » passe en #333 dès que le
+   panneau est ouvert. Sur le fond sombre du forum, l'or des liens sur ce gris
+   clair devient illisible et le libellé disparaît carrément.
+   On repasse donc l'ensemble sur la palette du forum : #242323 pour la liste
+   (déjà posé plus haut), un ton plus chaud pour les non-lues, et le doré
+   habituel pour les textes.
+   Les sélecteurs reprennent la cascade complète de Forumactif
+   (#fa_toolbar #fa_right ...) : leurs règles sont très spécifiques et une
+   version courte ne l'emporterait pas. */
+
+/* Le libellé de la barre d'outils, que Forumactif bascule en #333 sur fond
+   blanc à l'ouverture. Le fond est déjà neutralisé par la règle
+   #fa_welcome, #fa_notifications plus haut ; il reste la couleur du texte. */
+#fa_toolbar > #fa_right.notification > #fa_notifications {
+color: #c7a346!important;
+}
+
+/* Bordure du panneau alignée sur celle du bas de la barre d'outils. */
+#fa_toolbar #fa_right #notif_list {
+border-color: #534730;
+}
+
+#fa_toolbar #fa_right #notif_list li {
+color: #827e7e;
+}
+
+/* Non lues : au lieu du gris clair, un brun sombre à peine détaché du fond,
+   plus un filet doré à gauche qui porte seul la distinction lu / non lu. */
+#fa_toolbar #fa_right #notif_list li.unread {
+background-color: #2d2a24;
+box-shadow: inset 3px 0 0 #997b2f;
+}
+
+/* Le texte non lié des non-lues est remonté au-dessus du gris des lues :
+   elles sont déjà en gras, autant qu'elles ressortent vraiment. */
+#fa_toolbar #fa_right #notif_list li.unread div.contentText.ellipsis {
+color: #b3ada4!important;
+}
+
+#fa_toolbar #fa_right #notif_list li hr {
+border-top-color: #3a352c;
+}
+
 /* REFLET DORÉ ANIMÉ ------------------------------------------------------
    Appliqué au pseudo du groupe PNJ (group-6) et au titre .titrehaut.
 
