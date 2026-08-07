@@ -1111,18 +1111,22 @@ tr.post span.gensmall { display: none; }
    toute la largeur et n'a rien à côté d'elle dont il faudrait la séparer.
 
    Deux lignes de colonnes, en 780px (la largeur de #page-body) :
-     ligne 1  le contexte (large) et l'actu ;
-     ligne 2  l'univers (large), le staff, les membres, l'affiliation.
+     ligne 1  le contexte (large) et l'univers ;
+     ligne 2  l'actu (large), le staff, les membres, l'affiliation.
    Une seule classe .pacol-large sert les deux lignes : à 2 parts contre 1,
    elle donne les deux tiers en ligne 1 et deux cinquièmes en ligne 2.
 
-   Aucun filet, et des intitulés en bandeau plein plutôt que soulignés : des
-   soulignés à chaque rubrique et des filets entre colonnes quadrillaient la
-   page de lignes qui ne délimitaient rien. */
+   Ni filet ni fond : les intitulés dorés et les étiquettes <f> suffisent à
+   repérer les rubriques. Des soulignés partout et des filets entre colonnes
+   quadrillaient la page de lignes qui ne délimitaient rien. */
 
 .pabody {
 width: 780px;
 margin: 0 auto 20px;
+/* Retrait latéral : sans cadre autour, le texte tombait sur les bords de la
+   page. Le padding est intérieur (box-sizing) pour que la PA reste alignée
+   sur le QEEL et les tables de forums, qui font 780px hors tout. */
+padding: 0 30px;
 box-sizing: border-box;
 color: #827E7E;
 font-family: verdana, arial;
@@ -1197,14 +1201,12 @@ flex: 2 1 0;
 text-align: justify;
 }
 
-/* Bandeau de rubrique : mêmes capitales dorées que .qeelsub, mais posées
-   sur un fond plutôt que soulignées. */
+/* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
+   ni souligné — posé sur le fond de la page, centré au-dessus de sa
+   colonne. */
 .pasub {
 display: block;
 margin-bottom: 6px;
-padding: 2px 6px;
-border-radius: 3px;
-background-color: #242323;
 color: #c7a346;
 font-family: 'American Captain', arial;
 font-weight: bolder;
@@ -1221,20 +1223,11 @@ margin-top: 4px;
 }
 
 /* --- Arguments d'inscription --- */
-/* Amorce en Roboto Condensed dans le fil du texte, et non une rubrique à
-   part : deux bandeaux pour deux phrases pèseraient plus lourd que ce
-   qu'ils annoncent. */
+/* Amorcés par une étiquette <f>, comme le lieu du contexte et les dates de
+   l'actu : un intitulé à part pour une phrase pèserait plus lourd que ce
+   qu'il annonce. */
 .paligne {
 margin-top: 8px;
-}
-
-.paargu {
-color: #c7a346;
-font-family: 'Roboto Condensed', sans-serif;
-font-size: 11px;
-font-weight: bold;
-letter-spacing: .5px;
-text-transform: uppercase;
 }
 
 /* --- Staff et membres de la semaine --- */
@@ -1276,11 +1269,8 @@ line-height: 12px;
 .paplus {
 display: block;
 margin-top: 4px;
-font-family: 'Roboto Condensed', sans-serif;
 font-size: 10px;
-letter-spacing: .5px;
 text-align: center;
-text-transform: uppercase;
 }
 
 /* --- Affiliation --- */
