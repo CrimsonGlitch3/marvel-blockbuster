@@ -933,23 +933,23 @@ border-bottom: 2px solid #C5A96B;
 }
 
 /* Passage important dans le corps d'un message.
-   Volontairement NI doré NI souligné : le forum réserve déjà le doré aux
-   liens (#C7A346, sans soulignement) et le soulignement doré à la balise <u>
-   juste au-dessus. Reprendre l'un ou l'autre rendrait un .focus indiscernable
-   d'un lien. Un texte plus clair que le gris courant, posé sur un lavis doré
-   translucide, se lit comme un surlignage au marqueur : repérable au survol
-   de la page, sans casser la lecture ni imiter un élément cliquable.
+   Reprend le remplissage en dégradé doré déjà utilisé par .titrehaut,
+   .titrebloc1/2/3 et .profilpseudo : le passage appartient visuellement à la
+   même famille que les titres qui l'entourent, sans introduire ni couleur ni
+   effet étrangers à la charte.
    box-decoration-break: clone est indispensable — 3 des 10 passages du
-   contexte courent sur plusieurs lignes, et sans lui le lavis et le padding
-   ne s'appliqueraient qu'au premier fragment. */
+   contexte courent sur plusieurs lignes, et sans lui le dégradé ne serait
+   calculé que sur le premier fragment. */
 .focus {
-color: #CCC4B8;
-background-image: linear-gradient(
-    180deg,
-    rgba(197, 169, 107, 0) 55%,
-    rgba(197, 169, 107, .22) 55%
-);
-padding: 0 3px;
+font-weight: bold;
+background: -webkit-linear-gradient(180deg, #C5A96B, #997b2f);
+background: linear-gradient(180deg, #C5A96B, #997b2f);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+/* Repli si le dégradé sur texte n'est pas supporté : doré plat, jamais
+   invisible. */
+color: #C5A96B;
 -webkit-box-decoration-break: clone;
 box-decoration-break: clone;
 }
