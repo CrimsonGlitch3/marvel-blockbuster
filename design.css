@@ -295,33 +295,20 @@ text-align: center;
 }
 
 /* Texte courant, sans mise en forme particulière : le pseudo au-dessus porte
-   déjà l'accent visuel du bloc. */
+   déjà l'accent visuel du bloc.
+   Le bronze mat #A0814A (déjà utilisé par .park et .selectCode) le détache du
+   gris courant sans venir concurrencer l'or du pseudo juste au-dessus. */
 .profilnickname {
 display: block;
-position: relative;
-margin-top: 5px;
-padding-top: 5px;
+margin-top: 4px;
 max-width: 100%;
-color: inherit;
+color: #A0814A;
 font-style: normal;
 font-weight: bold;
 font-size: 11px;
 line-height: 13px;
 text-transform: none;
 letter-spacing: 0;
-}
-
-/* Filet doré entre le pseudo et l'identité secrète */
-.profilnickname:before {
-content: "";
-position: absolute;
-top: 0;
-left: 50%;
-width: 34px;
-height: 2px;
-margin-left: -17px;
-border-radius: 2px;
-background-image: linear-gradient(45deg, #C5A96B, #997b2f);
 }
 
 .profilavatar {
@@ -387,7 +374,9 @@ margin-bottom: 8px;
 .systab-onglet {
 flex: 1 1 0;
 min-width: 0;
-padding: 3px 4px 4px;
+/* Padding symétrique : l'ancien 3px/4px compensait les métriques décalées
+   d'American Captain, inutile depuis le passage à Roboto Condensed. */
+padding: 2px 4px;
 border-radius: 3px;
 background-color: #191818;
 border: 1px solid #424242;
@@ -1381,8 +1370,8 @@ color: #c7a346;
 color: #C5A96B!important;
 }
 
-/* PSEUDO DU GROUPE PNJ (group-6) -----------------------------------------
-   Reflet doré qui balaie lentement le pseudo, dans la palette du forum.
+/* REFLET DORÉ ANIMÉ ------------------------------------------------------
+   Appliqué au pseudo du groupe PNJ (group-6) et au titre .titrehaut.
 
    Ciblage par la classe de groupe plutôt que par la couleur inline : la
    règle survit à un changement de couleur du groupe dans le panneau
@@ -1391,7 +1380,8 @@ color: #C5A96B!important;
    Le second sélecteur, plus spécifique, est nécessaire pour l'emporter sur
    .profilpseudo .usr_grp_clr dans les profils à côté des messages. */
 span.group-6,
-.profilpseudo span.group-6 {
+.profilpseudo span.group-6,
+.titrehaut {
     /* Teintes relevées au pixel dans le logo BLOCKBUSTER du bandeau :
        bronze #755811 en bas des lettres, or dominant #CDA32D en haut.
        Le plancher est remonté à #8F6E1A pour rester lisible sur le fond
@@ -1417,8 +1407,15 @@ span.group-6,
        !important car Forumactif écrit la couleur du groupe en inline. */
     color: #C2992A !important;
 
+    animation: pseudo-reflet 5s ease-in-out infinite alternate;
+}
+
+/* inline-block réservé au pseudo : c'est un <span> inline, et le dégradé sur
+   texte s'y comporte mal sans. .titrehaut est un bloc centré par text-align,
+   que inline-block ferait au contraire coller à gauche. */
+span.group-6,
+.profilpseudo span.group-6 {
     display: inline-block;
-    animation: pseudo-reflet 6s ease-in-out infinite alternate;
 }
 
 /* alternate + ease-in-out : le reflet va et vient au lieu de boucler, ce qui
@@ -1431,7 +1428,8 @@ span.group-6,
 /* Respect du réglage système "réduire les animations" */
 @media (prefers-reduced-motion: reduce) {
     span.group-6,
-    .profilpseudo span.group-6 {
+    .profilpseudo span.group-6,
+    .titrehaut {
         animation: none;
         background-position: 50% 50%;
     }
