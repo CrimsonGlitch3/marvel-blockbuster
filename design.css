@@ -1380,28 +1380,51 @@ color: #c7a346;
 color: #C5A96B!important;
 }
 
-/* test pseudo PNJ */
-a[href^="/u"] span[style*="#9B4DCA"] {
-    background: linear-gradient(
+/* PSEUDO DU GROUPE PNJ (group-6) -----------------------------------------
+   Reflet doré qui balaie lentement le pseudo, dans la palette du forum.
+
+   Ciblage par la classe de groupe plutôt que par la couleur inline : la
+   règle survit à un changement de couleur du groupe dans le panneau
+   d'administration, et la comparaison d'attribut était sensible à la casse
+   du code hexadécimal.
+   Le second sélecteur, plus spécifique, est nécessaire pour l'emporter sur
+   .profilpseudo .usr_grp_clr dans les profils à côté des messages. */
+span.group-6,
+.profilpseudo span.group-6 {
+    background-image: linear-gradient(
         90deg,
-        #8b1e3f,
-        #d14d72,
-        #8c52ff,
-        #4169e1,
-        #8b1e3f
+        #997b2f,
+        #C5A96B,
+        #E5C9A0,
+        #C5A96B,
+        #997b2f
     );
-    background-size: 300% 100%;
+    background-size: 200% 100%;
 
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: transparent !important;
+    /* Repli doré si le dégradé sur texte n'est pas supporté : le pseudo
+       reste lisible et dans la charte, au lieu d'être invisible ou violet.
+       !important car Forumactif écrit la couleur du groupe en inline. */
+    color: #C5A96B !important;
 
     display: inline-block;
-    animation: pseudo-gradient 6s linear infinite;
+    animation: pseudo-reflet 9s ease-in-out infinite alternate;
 }
 
-@keyframes pseudo-gradient {
+/* alternate + ease-in-out : le reflet va et vient au lieu de boucler, ce qui
+   supprime le saut de raccord et rend le mouvement beaucoup plus discret. */
+@keyframes pseudo-reflet {
     from { background-position: 0% 50%; }
-    to   { background-position: 300% 50%; }
+    to   { background-position: 100% 50%; }
+}
+
+/* Respect du réglage système "réduire les animations" */
+@media (prefers-reduced-motion: reduce) {
+    span.group-6,
+    .profilpseudo span.group-6 {
+        animation: none;
+        background-position: 50% 50%;
+    }
 }
