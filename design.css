@@ -1482,7 +1482,7 @@ span.group-6,
        !important car Forumactif écrit la couleur du groupe en inline. */
     color: #C2992A !important;
 
-    animation: pseudo-reflet 5s ease-in-out infinite alternate;
+    animation: pseudo-reflet 3s ease-in-out infinite alternate;
 }
 
 /* inline-block réservé au pseudo : c'est un <span> inline, et le dégradé sur
