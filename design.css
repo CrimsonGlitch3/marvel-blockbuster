@@ -1028,6 +1028,23 @@ background-color: #191818!important;
 
 .sceditor-container {
 border: 1px solid #2e2d2d!important;
+/* box-sizing : la largeur inline posée par SCEditor est en 100%, la bordure
+   ci-dessus s'y ajouterait sinon et déborderait de 2px. */
+box-sizing: border-box;
+}
+
+/* SCEditor calcule au chargement une largeur FIXE en pixels qu'il pose en
+   inline sur sa zone de saisie (ex. width: 541px). Cette largeur dépasse la
+   colonne disponible et, les tables se dimensionnant sur leur contenu,
+   élargissait toute la page au-delà des 800px du bandeau — d'où les bandes
+   noires de part et d'autre du header. On rend la zone fluide pour qu'elle
+   suive la largeur du forum au lieu de l'imposer.
+   Sélecteur en enfant direct : l'iframe du sélecteur de smileys vit dans un
+   .sceditor-dropdown imbriqué et ne doit pas être étirée. */
+.sceditor-container > textarea,
+.sceditor-container > iframe {
+width: 100%!important;
+box-sizing: border-box;
 }
 
 div.sceditor-toolbar {
