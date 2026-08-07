@@ -1509,3 +1509,68 @@ span.group-6,
         background-position: 50% 50%;
     }
 }
+
+/* CHECKLIST DE VALIDATION (message posté par les membres sous leur fiche) -
+   Réutilise .fondhaut / .titrehaut / .fond, déjà chargées pour la fiche de
+   présentation elle-même, pour l'habillage général, et la balise <f>
+   existante pour la numérotation : seul ce qui est spécifique à la
+   checklist est défini ici.
+   Tout le style doit rester en CSS (rien en style="" dans le message) : le
+   HTML collé par les membres doit tenir sur une seule ligne, car un retour
+   à la ligne dans l'éditeur Forumactif devient un <br> réel au moment du
+   post, ce qui espace tout si le code est indenté sur plusieurs lignes. */
+.todointro {
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #827e7e;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.todoitem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #191818;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #827e7e;
+}
+
+.todoitem input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: #c7a346;
+    cursor: pointer;
+}
+
+.todoitem a {
+    color: #c7a346;
+    text-decoration: underline;
+}
+
+.todonote {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    font-style: italic;
+    color: #5a5a5a;
+}
+
+.todofoot {
+    text-align: center;
+    font-family: 'American Captain', arial;
+    font-weight: bolder;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #c7a346;
+    margin-top: 4px;
+}
