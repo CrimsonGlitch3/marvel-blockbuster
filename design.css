@@ -1104,147 +1104,305 @@ border: 1px solid #C5A96B;
 
 tr.post span.gensmall { display: none; }
 
-/* Page d'accueil */
-.bodypa {
-width: 750px;
-margin-top: 50px;
+/* PAGE D'ACCUEIL ----------------------------------------------------------
+   La PA reprend trait pour trait le gabarit du QEEL et des tables de forums :
+   un panneau de 780px hors tout (la largeur de #page-body), barre de titre
+   #2e2d2d en Roboto Condensed doré, corps #191818 bordé de 2px #2e2d2d,
+   colonnes séparées par un filet, intitulés de section en American Captain.
+   Rien n'y est encadré à l'intérieur : comme dans le QEEL, le contenu est
+   posé directement sur le fond, seuls les filets structurent la lecture.
+   box-sizing:border-box partout plutôt que l'arithmétique du QEEL
+   (746 + 2×15 de padding + 2×2 de bordure) : même résultat, mais la largeur
+   reste juste si l'on touche au padding. */
+
+.pabody {
+width: 780px;
+margin: 0 auto 25px;
+box-sizing: border-box;
 }
 
-.paimg img {
-display: block;
-height: 100px;
-margin-top: 10px;
-}
-
-.palinkbloc
-{
-display: block;
-margin: auto;
-margin-top: 5px;
-margin-bottom: 20px;
-}
-
-a.palink1
-{
-display: inline-block;
-margin: 4px;
-background-color: #C5A96B;
-width: 113px;
-height: 19px;
-line-height: 19px;
-color: #000000;
-border-radius: 3px;
-font-size: 14px;
-text-align: center;
-font-family: 'American Captain', arial; 
-font-weight: bolder;
-/*background: #C5A96B;*/
-}
-
-a.palink2 {
-display: inline-block;
-margin: 4px;
-background: #997b2f;
-width: 100px;
-height: 19px;
-line-height: 19px;
-color: #000000;
-border-radius: 3px;
-font-size: 14px;
-text-align: center;
-font-family: 'American Captain', arial; 
-font-weight: bolder;
-}
-
-.patitle {
-margin-top: 5px;
-margin-bottom: 5px;
-color: #c7a346;
-font-size: 20px;
-font-family: 'American Captain', arial; 
-font-weight: bolder;
-text-align: center;
-}
-
-.paleft {
-display: block;
-width: 350px;
-text-align: justify;
-font-size: 10px;
-margin-top: 20px;
-margin-left: 65px;
-}
-
-.paright {
-display: block;
-width: 190px;
-text-align: justify;
-font-size: 10px;
-margin-top: 20px;
-margin-right: 70px;
-}
-
-.paleft a
-{
-font-weight: bold;
-}
-
-.paright a
-{
-font-weight: bold;
-}
-
-.pasurvol
-{
-display: inline-block;
-width: 50px;
-margin: 3px;
-cursor: pointer;
-}
-
-.pasurvol img {
-max-width: 100%;
-}
-
-.pastaff {
-display: inline-block;
-width: 150px;
-float: right;
-text-align: justify;
-}
-
-.panext {
-display: inline-block;
-margin-top: 1px;
-width: 150px;
-}
-
-.staffleft {
-display: inline-block;
-}
-
-.staffright {
+/* --- Liens principaux --- */
+/* flex:1 1 0 + nowrap : six boutons de largeur strictement égale occupant
+   toute la ligne, comme les boîtes de groupes du QEEL (.gpcolor). */
+.palinkbloc {
+display: flex;
+flex-wrap: nowrap;
+gap: 6px;
 margin-bottom: 15px;
 }
 
-.staffleft img{
-height: 40px;
-width: auto;
-opacity: 0.8;
-display: inline-block;
--webkit-transition: all .3s ease-in;
--moz-transition: all .3s ease-in;
--o-transition: all .3s ease-in;
-transition: all .3s ease-in;
-margin: 0px 2px;
+a.palink {
+flex: 1 1 0;
+min-width: 0;
+height: 26px;
+line-height: 26px;
+background-image: linear-gradient(45deg, #C5A96B, #997b2f);
+border: 1px solid #C5A96B;
+border-radius: 3px;
+color: #000000;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+font-size: 16px;
+text-align: center;
+text-transform: uppercase;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+transition: all .25s ease-in;
 }
 
-.staffleft img:hover {
-opacity: 1;
+/* Survol en négatif, comme les onglets de profil (.systab-onglet) */
+a.palink:hover {
+background-image: none;
+background-color: #191818;
+color: #C5A96B;
+}
+
+/* --- Panneaux --- */
+.pabloc {
+box-sizing: border-box;
+width: 100%;
+margin-bottom: 15px;
+border: 2px solid #2e2d2d;
+background-color: #191818;
+color: #827E7E;
+font-family: verdana, arial;
+font-size: 11px;
+line-height: 15px;
+}
+
+.pablochead {
+padding: 10px;
+background-color: #2e2d2d;
+color: #c5a96b;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 16px;
+font-weight: bold;
+line-height: 20px;
+text-align: center;
+text-transform: uppercase;
+text-shadow: 0px 0px 5px #000;
+}
+
+.pablocbody {
+display: flex;
+align-items: stretch;
+gap: 15px;
+padding: 15px;
+}
+
+/* Variante 2×2 pour les arguments : une grille garde les quatre intitulés
+   alignés deux à deux, ce qu'un flex ne ferait pas si les textes diffèrent. */
+.pagrid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 5px 30px;
+}
+
+/* --- Colonnes --- */
+.pacol {
+flex: 1 1 0;
+min-width: 0;
+text-align: justify;
+}
+
+.pacol-large {
+flex: 2 1 0;
+}
+
+/* Colonne d'appoint (le staff) : largeur fixe plutôt qu'une part du reste,
+   pour qu'une équipe encore réduite ne laisse pas un grand vide à côté. */
+.pacol-small {
+flex: 0 0 150px;
+}
+
+/* Filet de séparation, à l'identique des colonnes du QEEL */
+.pablocbody > .pacol + .pacol {
+padding-left: 15px;
+border-left: 1px solid #2e2d2d;
+}
+
+/* Pas de filet dans la grille : les cellules ne sont pas des colonnes */
+.pagrid > .pacol + .pacol {
+padding-left: 0;
+border-left: 0;
+}
+
+/* Intitulé de section, identique à .qeelsub */
+.pasub {
+display: block;
+margin-top: 14px;
+margin-bottom: 5px;
+padding-bottom: 3px;
+color: #c7a346;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+font-size: 15px;
+letter-spacing: .5px;
+text-align: left;
+text-transform: uppercase;
+border-bottom: 1px solid #2e2d2d;
+}
+
+.pacol > .pasub:first-child {
+margin-top: 0;
+}
+
+.patexte {
+display: block;
+}
+
+.patexte a {
+font-weight: bold;
+}
+
+/* Une date par ligne, l'étiquette dorée <f> servant de puce */
+.paactu + .paactu {
+margin-top: 6px;
+}
+
+/* Appel à l'inscription, sur toute la largeur sous les quatre arguments.
+   Même habillage que le bouton de la checklist de validation (.todocta). */
+.pacta {
+grid-column: 1 / -1;
+display: block;
+margin-top: 10px;
+padding: 10px;
+text-align: center;
+border: 1px solid #534730;
+background-color: #242323;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+font-size: 16px;
+letter-spacing: .5px;
+text-transform: uppercase;
+color: #c7a346;
+transition: all .25s ease-in;
+}
+
+.pacta:hover {
+background-color: #191818;
+border-color: #C5A96B;
+}
+
+/* --- Staff --- */
+/* wrap + largeur fixe par membre : la liste s'allonge d'elle-même sur
+   plusieurs lignes à mesure que l'équipe grossit. */
+.pastafflist {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10px;
+}
+
+.pastaffmembre {
+width: 74px;
+text-align: center;
+}
+
+.pastaffmembre img {
+display: block;
+width: 56px;
+height: 56px;
+margin: 0 auto 4px;
+padding: 3px;
+border: 1px solid #373737;
+border-radius: 50%;
+background-color: #222222;
+opacity: .75;
 -webkit-transition: all .3s ease-in;
--moz-transition: all .3s ease-in;
--o-transition: all .3s ease-in;
 transition: all .3s ease-in;
+}
+
+.pastaffmembre img:hover {
+opacity: 1;
+}
+
+.pastaffnom {
+display: block;
+font-weight: bold;
+line-height: 13px;
+}
+
+/* --- Membres de la semaine --- */
+/* Vignette au même format que les avatars des derniers messages du forum
+   (.lastpost-avatar img) : 50×80, cadre #373737 sur fond #222. */
+.pamembre {
+display: flex;
+align-items: flex-start;
+gap: 10px;
+padding: 8px 0;
+}
+
+.pamembre + .pamembre {
+border-top: 1px solid #2e2d2d;
+}
+
+.pamembre img {
+display: block;
+flex-shrink: 0;
+width: 50px;
+height: 80px;
+padding: 4px;
+border: 1px solid #373737;
+border-radius: 3px;
+background-color: #222222;
+opacity: .75;
+-webkit-transition: all .3s ease-in;
+transition: all .3s ease-in;
+}
+
+.pamembre img:hover {
+opacity: 1;
+}
+
+.pamembretexte {
+min-width: 0;
+}
+
+.pamembrenom {
+display: block;
+margin-bottom: 2px;
+color: #C5A96B;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+font-size: 16px;
+letter-spacing: .5px;
+line-height: 18px;
+}
+
+.pamembreplus {
+display: block;
+margin-top: 6px;
+font-family: 'Roboto Condensed', sans-serif;
+font-size: 10px;
+font-weight: bold;
+letter-spacing: .5px;
+text-align: right;
+text-transform: uppercase;
+}
+
+/* --- Affiliation --- */
+/* Une simple barre de pied de page : intitulé doré puis les liens */
+.paaffil {
+display: flex;
+align-items: baseline;
+justify-content: center;
+gap: 12px;
+padding: 10px 15px;
+}
+
+.paaffilnom {
+color: #c7a346;
+font-family: 'American Captain', arial;
+font-weight: bolder;
+font-size: 15px;
+letter-spacing: .5px;
+text-transform: uppercase;
+}
+
+.paaffilliens a {
+font-weight: bold;
 }
 
 /* DEBUT SELECTOR */
