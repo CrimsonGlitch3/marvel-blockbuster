@@ -1391,15 +1391,22 @@ color: #C5A96B!important;
    .profilpseudo .usr_grp_clr dans les profils à côté des messages. */
 span.group-6,
 .profilpseudo span.group-6 {
+    /* Teintes relevées au pixel dans le logo BLOCKBUSTER du bandeau :
+       bronze #755811 en bas des lettres, or dominant #CDA32D en haut.
+       Le plancher est remonté à #8F6E1A pour rester lisible sur le fond
+       sombre du forum, et le reflet culmine à #E8C55A, juste au-dessus de
+       l'or du logo : assez net pour se voir, pas assez clair pour briller. */
     background-image: linear-gradient(
-        90deg,
-        #997b2f,
-        #C5A96B,
-        #E5C9A0,
-        #C5A96B,
-        #997b2f
+        100deg,
+        #8F6E1A 0%,
+        #A88221 16%,
+        #C2992A 34%,
+        #E8C55A 50%,
+        #C2992A 66%,
+        #A88221 84%,
+        #8F6E1A 100%
     );
-    background-size: 200% 100%;
+    background-size: 220% 100%;
 
     -webkit-background-clip: text;
     background-clip: text;
@@ -1407,10 +1414,10 @@ span.group-6,
     /* Repli doré si le dégradé sur texte n'est pas supporté : le pseudo
        reste lisible et dans la charte, au lieu d'être invisible ou violet.
        !important car Forumactif écrit la couleur du groupe en inline. */
-    color: #C5A96B !important;
+    color: #C2992A !important;
 
     display: inline-block;
-    animation: pseudo-reflet 9s ease-in-out infinite alternate;
+    animation: pseudo-reflet 6s ease-in-out infinite alternate;
 }
 
 /* alternate + ease-in-out : le reflet va et vient au lieu de boucler, ce qui
