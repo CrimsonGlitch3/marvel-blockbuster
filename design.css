@@ -1105,31 +1105,33 @@ border: 1px solid #C5A96B;
 tr.post span.gensmall { display: none; }
 
 /* PAGE D'ACCUEIL ----------------------------------------------------------
-   Panneau de 780px hors tout (la largeur de #page-body), même cadre que le
-   QEEL : fond #191818, bordure 2px #2e2d2d, et rien d'encadré à l'intérieur.
+   Pas de panneau : le contenu est posé directement sur le fond de la page,
+   comme dans le QEEL, et ce sont les bandeaux de rubrique qui le
+   structurent. Un cadre général n'aurait rien délimité — la PA occupe déjà
+   toute la largeur et n'a rien à côté d'elle dont il faudrait la séparer.
 
-   TROIS COLONNES QUI EMPILENT CHACUNE PLUSIEURS RUBRIQUES, et non des
-   rubriques qui se succèdent de haut en bas : empilées, le contexte formait
-   un pavé en haut et le staff une maigre ligne en bas, deux masses sans
-   rapport. Réparti en colonnes, le contenu se répond d'un bord à l'autre et
-   la page se termine à la même hauteur partout. La répartition est calculée
-   pour que les trois colonnes tombent à peu près juste : contexte et
-   arguments à gauche (la colonne large), univers et actu au centre, staff,
-   membres et affiliation à droite.
+   Deux lignes de colonnes, en 780px (la largeur de #page-body) :
+     ligne 1  le contexte (large) et l'actu ;
+     ligne 2  l'univers (large), le staff, les membres, l'affiliation.
+   Une seule classe .pacol-large sert les deux lignes : à 2 parts contre 1,
+   elle donne les deux tiers en ligne 1 et deux cinquièmes en ligne 2.
 
-   Aucun filet : les rubriques sont annoncées par un bandeau plein plutôt
-   que par un intitulé souligné. Six soulignés plus deux filets verticaux
-   quadrillaient la page ; les bandeaux repèrent mieux et ne tracent aucune
-   ligne à travers le bloc.
-
-   box-sizing:border-box plutôt que l'arithmétique du QEEL (746 + 2×15 de
-   padding + 2×2 de bordure) : même résultat, mais la largeur reste juste si
-   l'on touche au padding. */
+   Aucun filet, et des intitulés en bandeau plein plutôt que soulignés : des
+   soulignés à chaque rubrique et des filets entre colonnes quadrillaient la
+   page de lignes qui ne délimitaient rien. */
 
 .pabody {
 width: 780px;
 margin: 0 auto 20px;
 box-sizing: border-box;
+color: #827E7E;
+font-family: verdana, arial;
+font-size: 11px;
+line-height: 14px;
+}
+
+.pabody a {
+font-weight: bold;
 }
 
 /* --- Liens principaux --- */
@@ -1141,21 +1143,22 @@ box-sizing: border-box;
 .palinkbloc {
 display: flex;
 flex-wrap: nowrap;
-gap: 5px;
-margin-bottom: 12px;
+gap: 8px;
+margin: 5px 0 20px;
 }
 
 a.palink {
 flex: 1 1 0;
 min-width: 0;
-height: 22px;
-line-height: 22px;
+box-sizing: border-box;
+padding: 4px 6px;
 background-color: #C5A96B;
 border-radius: 3px;
 color: #000000;
 font-family: 'American Captain', arial;
 font-weight: bolder;
 font-size: 15px;
+line-height: 19px;
 text-align: center;
 text-transform: uppercase;
 white-space: nowrap;
@@ -1172,24 +1175,15 @@ a.palink:hover {
 background-color: #E5C9A0;
 }
 
-/* --- Panneau et colonnes --- */
-.pabloc {
-box-sizing: border-box;
-width: 100%;
+/* --- Lignes et colonnes --- */
+.parow {
 display: flex;
 align-items: stretch;
-gap: 18px;
-padding: 15px;
-border: 2px solid #2e2d2d;
-background-color: #191818;
-color: #827E7E;
-font-family: verdana, arial;
-font-size: 11px;
-line-height: 14px;
+gap: 20px;
 }
 
-.pabloc a {
-font-weight: bold;
+.parow + .parow {
+margin-top: 14px;
 }
 
 .pacol {
@@ -1197,9 +1191,9 @@ flex: 1 1 0;
 min-width: 0;
 }
 
-/* Seule colonne assez large pour être justifiée sans écarter les mots */
+/* Colonne assez large pour être justifiée sans écarter les mots */
 .pacol-large {
-flex: 1.5 1 0;
+flex: 2 1 0;
 text-align: justify;
 }
 
@@ -1207,7 +1201,6 @@ text-align: justify;
    sur un fond plutôt que soulignées. */
 .pasub {
 display: block;
-margin-top: 12px;
 margin-bottom: 6px;
 padding: 2px 6px;
 border-radius: 3px;
@@ -1222,10 +1215,6 @@ text-align: center;
 text-transform: uppercase;
 }
 
-.pacol > .pasub:first-child {
-margin-top: 0;
-}
-
 /* Une date par ligne, l'étiquette dorée <f> servant de puce */
 .paactu + .paactu {
 margin-top: 4px;
@@ -1234,9 +1223,7 @@ margin-top: 4px;
 /* --- Arguments d'inscription --- */
 /* Amorce en Roboto Condensed dans le fil du texte, et non une rubrique à
    part : deux bandeaux pour deux phrases pèseraient plus lourd que ce
-   qu'ils annoncent. Les deux arguments closent chacun une colonne, et
-   c'est ce qui met les trois à la même hauteur : à les garder ensemble,
-   celle qui les portait dépassait l'autre de 50px. */
+   qu'ils annoncent. */
 .paligne {
 margin-top: 8px;
 }
@@ -1297,8 +1284,15 @@ text-transform: uppercase;
 }
 
 /* --- Affiliation --- */
+/* Liens empilés : sur une seule ligne, "PRD | Topsites | Partenaires"
+   imposerait à la colonne une largeur qu'aucun de ses voisins ne réclame. */
 .paaffil {
 text-align: center;
+}
+
+.paaffil a {
+display: block;
+line-height: 15px;
 }
 
 /* DEBUT SELECTOR */
