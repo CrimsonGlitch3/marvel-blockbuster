@@ -1142,11 +1142,14 @@ tr.post span.gensmall { display: none; }
 
 .pabody {
 width: 780px;
-margin: 0 auto 20px;
+margin: 0 auto;
 /* Retrait latéral : sans cadre autour, le texte tombait sur les bords de la
    page. Le padding est intérieur (box-sizing) pour que la PA reste alignée
-   sur le QEEL et les tables de forums, qui font 780px hors tout. */
-padding: 0 60px;
+   sur le QEEL et les tables de forums, qui font 780px hors tout.
+   Haut et bas identiques : l'air au-dessus des liens était porté par une
+   marge de 5px et celui du bas par une marge extérieure de 20px, deux
+   valeurs qui n'avaient aucune raison de différer. */
+padding: 25px 60px;
 box-sizing: border-box;
 color: #827E7E;
 font-family: verdana, arial;
@@ -1168,7 +1171,7 @@ font-weight: bold;
 display: flex;
 flex-wrap: nowrap;
 gap: 8px;
-margin: 5px 0 20px;
+margin: 0 0 20px;
 }
 
 a.palink {
@@ -1224,17 +1227,13 @@ text-align: justify;
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
    ni souligné — posé sur le fond de la page, centré au-dessus de sa
    colonne. */
-/* min-height à deux lignes, texte centré dedans : "Membres de la semaine"
-   ne tient pas sur une ligne dans une colonne étroite, et sans hauteur
-   commune son intitulé poussait ses vignettes 22px plus bas que celles du
-   staff. La réserve vaut pour tous les intitulés, quel que soit leur
-   libellé — un titre rallongé plus tard ne décalera rien. */
+/* Pas de hauteur réservée : tous les libellés tiennent sur une ligne dans
+   leur colonne, et les rubriques démarrent donc à la même hauteur. Un
+   intitulé assez long pour passer sur deux lignes décalerait en revanche
+   tout ce qui le suit — c'est à surveiller si l'un d'eux est rallongé. */
 .pasub {
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 44px;
-margin-bottom: 6px;
+display: block;
+margin-bottom: 8px;
 color: #c7a346;
 font-family: 'American Captain', arial;
 font-weight: bolder;
@@ -1245,10 +1244,10 @@ text-align: center;
 text-transform: uppercase;
 }
 
-/* L'actu au fer à gauche : sa colonne est justifiée (.pacol-large), mais
-   une brève de deux lignes justifiée écarte visiblement les mots. */
+/* Justification des colonnes étroites, que .pacol-large ne couvre pas */
+.patexte,
 .paactu {
-text-align: left;
+text-align: justify;
 }
 
 /* Une date par ligne, l'étiquette dorée <f> servant de puce */
