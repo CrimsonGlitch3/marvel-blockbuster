@@ -1136,9 +1136,11 @@ tr.post span.gensmall { display: none; }
 
    Deux lignes de colonnes, en 780px (la largeur de #page-body) :
      ligne 1  le contexte (large) et l'univers ;
-     ligne 2  l'actu (large), le staff, les membres, l'affiliation.
-   Une seule classe .pacol-large sert les deux lignes : à 2 parts contre 1,
-   elle donne les deux tiers en ligne 1 et deux cinquièmes en ligne 2.
+     ligne 2  affiliation, staff, à l'honneur (à égalité) et l'actu.
+   .pacol-large sert la colonne large de la ligne du haut (le contexte).
+   .pacol-actu cale l'actu sur la largeur réelle de l'univers, en pixels :
+   les deux lignes n'ayant ni le même nombre de colonnes ni la même
+   gouttière, une part flexible n'y donnerait pas la même largeur.
 
    Ni filet ni fond : les intitulés dorés et les étiquettes <f> suffisent à
    repérer les rubriques. Des soulignés partout et des filets entre colonnes
@@ -1248,18 +1250,17 @@ flex: 35 1 0;
 flex: 27 1 0;
 }
 
-/* L'affiliation ne prend pas une part entière : trois mots empilés n'en ont
-   pas besoin, et la place rendue profite aux trois autres rubriques.
-   72px est la largeur de son intitulé en American Captain — c'est lui le
-   plus large, pas "Partenaires" (62px).
-
-   Largeur figée et non "flex: 0 0 auto" : au premier chargement, American
-   Captain n'est pas encore arrivée et "AFFILIATION" se mesure en Arial de
-   repli, soit 116px. Toute la ligne se réorganisait donc sous les yeux du
-   visiteur au moment où la police prenait le relais.
-   À revoir si l'intitulé change : un libellé plus long serait rogné. */
-.pacol-affil {
-flex: 0 0 72px;
+/* L'actu est calée sur la largeur réelle de l'univers (270px, ligne du
+   haut) plutôt que sur une part flexible : les deux lignes n'ont ni le
+   même nombre de colonnes ni la même gouttière, un même ratio de parts n'y
+   donnerait donc pas la même largeur en pixels.
+   flex: 0 0 (et non flex: 2 1 0 comme avant) : la colonne ne doit ni
+   grandir ni rétrécir, elle doit rester à 270px pile.
+   Affiliation, Staff et À l'honneur se partagent alors le reste à égalité
+   via le flex: 1 1 0 par défaut de .pacol — inutile de leur épingler une
+   largeur chacune. */
+.pacol-actu {
+flex: 0 0 270px;
 }
 
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
@@ -1319,7 +1320,7 @@ overflow-y: auto;
    l'actu : un intitulé à part pour une phrase pèserait plus lourd que ce
    qu'il annonce. */
 .paligne {
-margin-top: 8px;
+margin-top: 0px;
 }
 
 /* --- Staff et membres de la semaine --- */
