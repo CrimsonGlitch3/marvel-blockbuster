@@ -748,7 +748,7 @@ background-color: #191818;
 border-left: 2px solid #2e2d2d;
 border-right: 2px solid #2e2d2d;
 border-bottom: 2px solid #2e2d2d;
-color: #827E7E;
+color: #8F8577;
 font-family: verdana, arial;
 font-size: 11px;
 padding: 15px;
@@ -903,7 +903,7 @@ padding: 0 !important;
 
 #lastconnected td.row1 .gensmall
 {
-color: #827E7E;
+color: #8F8577;
 font-family: verdana, arial;
 font-size: 11px;
 line-height: 15px;
@@ -1033,7 +1033,7 @@ border: 0px solid white;
 dd.quote
 {
 padding: 10px;
-color: #827E7E;
+color: #8F8577;
 text-align: justify;
 font-size: 10px;
 margin: auto;
@@ -1045,7 +1045,7 @@ margin-bottom: 10px;
 
 dd.code{
 padding: 10px;
-color: #827E7E;
+color: #8F8577;
 text-align: justify;
 font-size: 10px;
 margin: auto;
@@ -1091,7 +1091,7 @@ word-break: break-all;
 
 textarea, select {
 border: 1px solid #2e2d2d!important;
-color: #827E7E!important;
+color: #8F8577!important;
 }
 
 /* Forumactif force .sceditor-container à #FFFFFF !important dans l'en-tête
@@ -1190,7 +1190,7 @@ margin: 0 auto;
    valeurs qui n'avaient aucune raison de différer. */
 padding: 25px 60px;
 box-sizing: border-box;
-color: #827E7E;
+color: #8F8577;
 font-family: verdana, arial;
 font-size: 11px;
 line-height: 14px;
@@ -1632,7 +1632,7 @@ font-size: 12px!important;
 
 div.contentText.ellipsis
 {
-color: #827e7e!important;
+color: #8F8577!important;
 text-transform: initial;
 }
 
@@ -1683,7 +1683,7 @@ border-color: #534730;
 }
 
 #fa_toolbar #fa_right #notif_list li {
-color: #827e7e;
+color: #8F8577;
 }
 
 /* Non lues : au lieu du gris clair, un brun sombre à peine détaché du fond,
@@ -1813,7 +1813,7 @@ span.group-6,
     font-size: 11px;
     font-style: italic;
     line-height: 1.5;
-    color: #827e7e;
+    color: #8F8577;
     text-align: center;
     margin-bottom: 14px;
 }
@@ -1826,7 +1826,7 @@ span.group-6,
     font-family: Verdana, sans-serif;
     font-size: 12px;
     line-height: 1.5;
-    color: #827e7e;
+    color: #8F8577;
 }
 
 .todoitem + .todoitem {
