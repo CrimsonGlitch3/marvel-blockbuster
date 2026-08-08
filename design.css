@@ -534,6 +534,12 @@ width: 40px;
    « dernier message » plutôt que par la description. */
 td.row1.over {
 vertical-align: middle;
+/* 2px de padding par défaut + 10px de respiration : une fois le contenu
+   recentré, la liste des forums était devenue trop compacte. On ajoute l'air
+   sur la cellule elle-même plutôt que sur .forumdesc, pour que le haut et le
+   bas restent symétriques par construction. */
+padding-top: 12px;
+padding-bottom: 12px;
 }
 
 .forumdesc {
