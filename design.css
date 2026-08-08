@@ -1361,6 +1361,15 @@ gap: 8px;
 text-align: center;
 }
 
+/* Emplacement en attente d'avatar (à l'honneur, avant l'ajout des deux
+   images) : .pavisage se dimensionne normalement sur son <img>, absent
+   ici, donc rien ne fixerait sa largeur sans cette classe. À retirer dès
+   qu'une image est posée dans le <a> — voir PA.php. */
+.pavisage-vide {
+width: 40px;
+height: 40px;
+}
+
 .pavisage img {
 display: block;
 height: 40px;
@@ -1375,29 +1384,31 @@ transition: all .3s ease-in;
 opacity: 1;
 }
 
-/* Fond doré derrière l'avatar du staff : mêmes teintes et angle que
-   .focus, mais animé comme .reflet (même @keyframes, plus bas dans ce
-   fichier). inset: 0 cale le fond exactement sur la boîte de l'image —
-   .pavisage n'a pas d'autre contenu ni de padding, sa largeur est donc
-   déjà celle de l'image — sans quoi un fond plus étroit ou décalé se
-   serait vu à côté d'elle plutôt que derrière. L'avatar, en transparence,
-   se pose dessus sans laisser deviner de joint entre les deux. */
-.pastaff .pavisage {
+/* Fond doré derrière chaque avatar (staff et à l'honneur) : mêmes teintes
+   et angle que .focus, mais animé comme .reflet (même @keyframes, plus
+   bas dans ce fichier). inset: 0 cale le fond exactement sur la boîte de
+   l'image — .pavisage n'a pas d'autre contenu ni de padding, sa largeur
+   est donc déjà celle de l'image — sans quoi un fond plus étroit ou
+   décalé se serait vu à côté d'elle plutôt que derrière. L'avatar, en
+   transparence, se pose dessus sans laisser deviner de joint entre les
+   deux. Un seul jeu de règles pour les deux rubriques : elles partagent
+   déjà .pavisage/.pavisages, inutile de dupliquer par rubrique. */
+.pavisage {
 position: relative;
 }
 
-.pastaff .pavisage::before {
+.pavisage::before {
 content: "";
 position: absolute;
 inset: 0;
 z-index: 1;
 background-image: linear-gradient(45deg, #C5A96B, #997b2f);
 background-size: 220% 100%;
-border-radius: 3px;
+border-radius: 8px;
 animation: pseudo-reflet 3s ease-in-out infinite alternate;
 }
 
-.pastaff .pavisage a {
+.pavisage a {
 position: relative;
 z-index: 2;
 display: block;
@@ -1730,7 +1741,7 @@ span.group-6,
     .profilpseudo span.group-6,
     .titrehaut,
     .reflet,
-    .pastaff .pavisage::before {
+    .pavisage::before {
         animation: none;
         background-position: 50% 50%;
     }

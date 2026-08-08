@@ -15,7 +15,7 @@
 
 		<div class="pacol pacol-large">
 			<div class="pasub">Le contexte</div>
-			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement, à l'abri de serveurs secrets. Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span>
+			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement, dissimulée dans des serveurs secrets. Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il ne vous reste que <span class="reflet">30 jours pour sauver le monde.</span>
 			<a class="paplus paplus-droite" href="t22-le-contexte">Lire la suite →</a>
 		</div>
 
@@ -45,7 +45,7 @@
 		<div class="pacol">
 			<div class="pasub">Le staff</div>
 			<div class="pacontenu">
-				<div class="pavisages pastaff">
+				<div class="pavisages">
 					<div class="pavisage">
 						<a href="https://marvel-blockbuster.forumactif.com/u2"><img src="https://i.imgur.com/P8lmtug.png" alt="Pietro Maximoff" /></a>
 					</div>
@@ -58,9 +58,9 @@
 			<div class="pasub">A l'honneur</div>
 			<div class="pacontenu">
 				<div class="pavisages">
-					<!-- avatars à remplacer -->
-					<div class="pavisage"><a href=""><img src="https://i.imgur.com/c28b9wS.png" alt="" /></a></div>
-					<div class="pavisage"><a href=""><img src="https://i.imgur.com/c28b9wS.png" alt="" /></a></div>
+					<!-- avatars à poser : retirer pavisage-vide une fois l'image en place -->
+					<div class="pavisage pavisage-vide"><a href=""></a></div>
+					<div class="pavisage pavisage-vide"><a href=""></a></div>
 				</div>
 				<a class="paplus" href="">En savoir +</a>
 			</div>
