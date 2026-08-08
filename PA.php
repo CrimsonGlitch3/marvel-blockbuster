@@ -45,16 +45,11 @@
 			<div class="pacontenu">
 				<div class="pavisages">
 					<div class="pavisage">
-						<a href="https://marvel-blockbuster.forumactif.com/u2"><img src="https://i.imgur.com/jnvSnnS.png" alt="Pietro Maximoff" /></a>
+						<a href="https://marvel-blockbuster.forumactif.com/u2"><img src="https://i.imgur.com/P8lmtug.png" alt="Pietro Maximoff" /></a>
 					</div>
 				</div>
 				<a class="paplus" href="">Rejoindre&nbsp;?</a>
 			</div>
-		</div>
-
-		<div class="pacol pacol-large">
-			<div class="pasub">L'actu</div>
-			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
 		</div>
 
 		<div class="pacol">
@@ -62,11 +57,16 @@
 			<div class="pacontenu">
 				<div class="pavisages">
 					<!-- avatars à remplacer -->
-					<div class="pavisage"><a href=""><img src="https://i.imgur.com/jnvSnnS.png" alt="" /></a></div>
-					<div class="pavisage"><a href=""><img src="https://i.imgur.com/jnvSnnS.png" alt="" /></a></div>
+					<div class="pavisage"><a href=""><img src="https://i.imgur.com/c28b9wS.png" alt="" /></a></div>
+					<div class="pavisage"><a href=""><img src="https://i.imgur.com/c28b9wS.png" alt="" /></a></div>
 				</div>
-				<a class="paplus" href="">En savoir +</a>
+				<a class="paplus" href="">Recrutement</a>
 			</div>
+		</div>
+
+		<div class="pacol pacol-large">
+			<div class="pasub">L'actu</div>
+			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
 		</div>
 
 	</div>
