@@ -1053,7 +1053,11 @@ line-height: 12px;
 border: 1px solid #2e2d2d;
 background-color: #000;
 margin-bottom: 10px;
-width: 400px;
+/* Largeur fluide (au lieu d'un 400px fixe) : la codebox épouse ainsi
+   exactement la largeur de .codebox, quelle que soit la colonne du forum,
+   sans déborder ni laisser de marges asymétriques. */
+width: auto;
+box-sizing: border-box;
 }
 
 .selectCode { 
@@ -1074,6 +1078,17 @@ color: #C5A96B;
 }
 
 div.cont_code { clear: right; }
+
+/* Forumactif impose ".code div.cont_code { max-height:200px; overflow:auto; }"
+   dans sa feuille 23-ltr.css, ce qui crée l'ascenseur vertical de la codebox.
+   Même sélecteur (même spécificité) chargé après : on repasse en hauteur
+   libre et on casse les longues chaînes (URLs) pour ne plus jamais avoir
+   besoin de défiler, ni verticalement ni horizontalement. */
+.code div.cont_code {
+max-height: none;
+overflow: visible;
+word-break: break-all;
+}
 
 textarea, select {
 border: 1px solid #2e2d2d!important;
