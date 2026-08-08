@@ -1225,16 +1225,11 @@ text-align: justify;
 }
 
 /* LIGNE DU HAUT ------------------------------------------------------------
-   Deux colonnes seulement, mais calées sur la grille de la ligne du bas :
-   "L'univers" doit démarrer exactement où démarre "À l'honneur".
-
-   En bas, cette troisième colonne commence après 3 parts et 2 gouttières,
-   soit 3(L − 3×20)/5 + 2×20 = 0,6 L + 4 sur une largeur utile L. La colonne
-   de droite vaut donc L − (0,6 L + 4) = 0,4 L − 4, et celle de gauche ce qui
-   reste une fois retirée la gouttière élargie : 0,6 L + 4 − 40.
-
-   Largeurs en pourcentage et non en pixels : elles suivent la largeur utile,
-   et l'alignement tient si le retrait latéral de .pabody change. */
+   Gouttière élargie à 40px, et un rapport 37/25 qui donne 370px au contexte
+   contre 250px à l'univers sur les 780px de la PA.
+   Ce rapport est arbitraire : il vaut ce que vaut le compromis entre la
+   longueur du contexte et celle de l'univers, à réajuster si l'un des deux
+   textes change beaucoup. */
 .parow-haut {
 gap: 40px;
 }
@@ -1242,11 +1237,18 @@ gap: 40px;
 /* Double classe sur la colonne large : .parow-haut > .pacol la vise aussi,
    à spécificité strictement égale, et l'emporterait par l'ordre du fichier. */
 .parow-haut > .pacol.pacol-large {
-flex: 0 0 calc(60% - 36px);
+flex: 37 1 0;
 }
 
 .parow-haut > .pacol {
-flex: 0 0 calc(40% - 4px);
+flex: 25 1 0;
+}
+
+/* L'affiliation se réduit à la largeur de son plus long lien : trois mots
+   empilés n'ont pas besoin d'une part entière, et la place rendue profite
+   aux trois autres rubriques de la ligne. */
+.pacol-affil {
+flex: 0 0 auto;
 }
 
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
@@ -1278,6 +1280,27 @@ text-align: justify;
 /* Une date par ligne, l'étiquette dorée <f> servant de puce */
 .paactu + .paactu {
 margin-top: 4px;
+}
+
+/* LIGNE DU BAS : UNE HAUTEUR COMMUNE ---------------------------------------
+   L'actu est la seule rubrique dont le texte peut s'allonger sans prévenir ;
+   elle est bloquée à 72px et défile au-delà, ce qui fige la hauteur de la
+   ligne. Les trois autres rubriques adoptent la même hauteur et centrent
+   leur contenu dedans, sinon elles flotteraient en haut d'une ligne dont
+   elles n'occupent que la moitié. */
+.pacontenu {
+height: 72px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+/* L'actu ne se centre pas : son texte court au fil des lignes depuis le
+   haut, et l'ascenseur prend le relais quand la brève déborde. */
+.paactu {
+display: block;
+overflow-y: auto;
 }
 
 /* --- Arguments d'inscription --- */
@@ -1317,18 +1340,29 @@ transition: all .3s ease-in;
 opacity: 1;
 }
 
-.pavisagenom {
+/* LIENS D'ACTION -----------------------------------------------------------
+   "Lire la suite", "Rejoindre ?" et "En savoir +" partagent une seule
+   apparence, et c'est elle qui les distingue de .reflet : le doré animé de
+   .reflet appuie un passage AU FIL du texte, le lien d'action est plus
+   petit, sans gras, seul sur sa ligne et suivi d'une flèche ou d'un signe.
+   Deux dorés dans la même page ne se confondent pas s'ils n'ont ni la même
+   graisse, ni la même taille, ni la même place.
+
+   Sélecteur en .pabody a.paplus : .pabody a met tous les liens de la PA en
+   gras, à spécificité égale à un simple a.paplus. */
+.pabody a.paplus {
 display: block;
-margin-top: 2px;
+margin-top: 6px;
 font-size: 10px;
-line-height: 12px;
+font-weight: normal;
+text-align: center;
 }
 
-.paplus {
-display: block;
-margin-top: 4px;
-font-size: 10px;
-text-align: center;
+/* Variante de fin de paragraphe : le lien passe à la ligne et se cale à
+   droite, là où le regard finit la lecture. Même sélecteur en .pabody a
+   que ci-dessus, sans quoi le text-align:center l'emporterait. */
+.pabody a.paplus-droite {
+text-align: right;
 }
 
 /* --- Affiliation --- */

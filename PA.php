@@ -15,7 +15,8 @@
 
 		<div class="pacol pacol-large">
 			<div class="pasub">Le contexte</div>
-			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement... Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span> <a href="t22-le-contexte">Lire la suite</a>.
+			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement... Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span>
+			<a class="paplus paplus-droite" href="t22-le-contexte">Lire la suite →</a>
 		</div>
 
 		<div class="pacol">
@@ -25,37 +26,41 @@
 
 	</div>
 
-	<!-- ///// LIGNE 2 : actu + staff + membres + affiliation ///// -->
+	<!-- ///// LIGNE 2 : actu + staff + à l'honneur + affiliation ///// -->
 	<div class="parow">
 
 		<div class="pacol pacol-large">
 			<div class="pasub">L'actu</div>
-			<div class="paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
+			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
 		</div>
 
 		<div class="pacol">
 			<div class="pasub">Le staff</div>
-			<div class="pavisages">
-				<div class="pavisage">
-					<a href="https://marvel-blockbuster.forumactif.com/u2"><img src="https://i.imgur.com/jnvSnnS.png" alt="Pietro Maximoff" /></a>
-					<a class="pavisagenom" href="https://marvel-blockbuster.forumactif.com/u2">Pietro Maximoff</a>
+			<div class="pacontenu">
+				<div class="pavisages">
+					<div class="pavisage">
+						<a href="https://marvel-blockbuster.forumactif.com/u2"><img src="https://i.imgur.com/jnvSnnS.png" alt="Pietro Maximoff" /></a>
+					</div>
 				</div>
+				<a class="paplus" href="">Rejoindre&nbsp;?</a>
 			</div>
 		</div>
 
 		<div class="pacol">
 			<div class="pasub">À l'honneur</div>
-			<div class="pavisages">
-				<!-- avatars à remplacer -->
-				<div class="pavisage"><a href=""><img src="https://i.imgur.com/jnvSnnS.png" alt="" /></a></div>
-				<div class="pavisage"><a href=""><img src="https://i.imgur.com/jnvSnnS.png" alt="" /></a></div>
+			<div class="pacontenu">
+				<div class="pavisages">
+					<!-- avatars à remplacer -->
+					<div class="pavisage"><a href=""><img src="https://i.imgur.com/jnvSnnS.png" alt="" /></a></div>
+					<div class="pavisage"><a href=""><img src="https://i.imgur.com/jnvSnnS.png" alt="" /></a></div>
+				</div>
+				<a class="paplus" href="">En savoir +</a>
 			</div>
-			<a class="paplus" href="">En savoir +</a>
 		</div>
 
-		<div class="pacol">
+		<div class="pacol pacol-affil">
 			<div class="pasub">Affiliation</div>
-			<div class="paaffil">
+			<div class="pacontenu paaffil">
 				<a href="https://www.pub-rpg-design.com/">PRD</a>
 				<a href="https://marvel-blockbuster.forumactif.com/t17-topsites">Topsites</a>
 				<a href="https://marvel-blockbuster.forumactif.com/f10-hors-du-forum">Partenaires</a>
