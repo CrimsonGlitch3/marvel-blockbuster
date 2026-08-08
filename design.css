@@ -1080,13 +1080,12 @@ color: #C5A96B;
 div.cont_code { clear: right; }
 
 /* Forumactif impose ".code div.cont_code { max-height:200px; overflow:auto; }"
-   dans sa feuille 23-ltr.css, ce qui crée l'ascenseur vertical de la codebox.
-   Même sélecteur (même spécificité) chargé après : on repasse en hauteur
-   libre et on casse les longues chaînes (URLs) pour ne plus jamais avoir
-   besoin de défiler, ni verticalement ni horizontalement. */
+   dans sa feuille 23-ltr.css : l'ascenseur vertical (défilement du code trop
+   long) est voulu et reste inchangé. Seul l'ascenseur latéral est moche :
+   les longues chaînes (URLs) forçaient un débordement horizontal. On casse
+   ces chaînes et on masque juste overflow-x, sans toucher à overflow-y. */
 .code div.cont_code {
-max-height: none;
-overflow: visible;
+overflow-x: hidden;
 word-break: break-all;
 }
 
