@@ -792,6 +792,10 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
+.qeelsub-inline #dernier_membre a {
+color: #E5C9A0;
+}
+
 /* Contenu posé directement sur le fond, sans encadré */
 .qeelresume,
 .qeelonline,
