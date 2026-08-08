@@ -109,6 +109,7 @@ text-align: right;
 display: block;
 margin-left: 20px;
 margin-bottom: -12px;
+margin-top: 10px;
 font-size: 20px;
 font-family: 'American Captain', arial; 
 font-weight: bolder;
@@ -178,6 +179,14 @@ padding: 5px;
 
 .iconpv img {
 width: 100px;
+}
+
+.piclink
+{
+height: 85px;
+margin-right: 10px;
+margin-bottom: 4px;
+float: left;
 }
 
 .infosplay {
