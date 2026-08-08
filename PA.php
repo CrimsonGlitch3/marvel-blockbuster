@@ -15,7 +15,7 @@
 
 		<div class="pacol pacol-large">
 			<div class="pasub">Le contexte</div>
-			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement... Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span>
+			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement, à l'abri de serveurs dont personne ne connaissait l'existence. Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span>
 			<a class="paplus paplus-droite" href="t22-le-contexte">Lire la suite →</a>
 		</div>
 
@@ -45,7 +45,7 @@
 		<div class="pacol">
 			<div class="pasub">Le staff</div>
 			<div class="pacontenu">
-				<div class="pavisages">
+				<div class="pavisages pastaff">
 					<div class="pavisage">
 						<a href="https://marvel-blockbuster.forumactif.com/u2"><img src="https://i.imgur.com/P8lmtug.png" alt="Pietro Maximoff" /></a>
 					</div>
@@ -55,7 +55,7 @@
 		</div>
 
 		<div class="pacol">
-			<div class="pasub">À l'honneur</div>
+			<div class="pasub">A l'honneur</div>
 			<div class="pacontenu">
 				<div class="pavisages">
 					<!-- avatars à remplacer -->
@@ -68,8 +68,8 @@
 
 		<div class="pacol pacol-actu">
 			<div class="pasub">L'actu</div>
-			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
-			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
+			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !<br>
+			<f>0X/08</f> <i>informations importantes à venir sur le lancement des animations du forum.</i></div>
 		</div>
 
 	</div>

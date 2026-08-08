@@ -1248,6 +1248,12 @@ flex: 35 1 0;
 
 .parow-haut > .pacol {
 flex: 27 1 0;
+/* Sert d'ancrage aux CTA de fin de colonne, voir a.paplus-droite plus
+   bas : les deux colonnes de cette ligne ont la même hauteur totale
+   (align-items: stretch du .parow), padding-bottom réserve la place du
+   lien pour pouvoir l'y épingler. */
+position: relative;
+padding-bottom: 20px;
 }
 
 /* L'actu est calée sur la largeur réelle de l'univers (270px, ligne du
@@ -1258,9 +1264,16 @@ flex: 27 1 0;
    grandir ni rétrécir, elle doit rester à 270px pile.
    Affiliation, Staff et À l'honneur se partagent alors le reste à égalité
    via le flex: 1 1 0 par défaut de .pacol — inutile de leur épingler une
-   largeur chacune. */
+   largeur chacune.
+
+   margin-left : la gouttière du bas est à 20px partout (.parow), mais
+   entre À l'honneur et l'actu on veut la même respiration qu'en ligne du
+   haut (40px). Le gap de .parow s'applique à tout le rang ; on ajoute donc
+   20px en plus juste ici plutôt que de casser l'espacement uniforme des
+   trois premières colonnes. */
 .pacol-actu {
 flex: 0 0 270px;
+margin-left: 20px;
 }
 
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
@@ -1352,6 +1365,33 @@ transition: all .3s ease-in;
 opacity: 1;
 }
 
+/* Bandeau doré derrière l'avatar du staff, même dégradé que <f>. Posé en
+   bas et plus étroit que l'avatar, il reste visible tout autour ; l'avatar
+   (position + z-index au-dessus) le dépasse par le haut, comme un
+   médaillon qui repose sur son socle plutôt qu'une simple vignette. */
+.pastaff .pavisage {
+position: relative;
+padding-bottom: 6px;
+}
+
+.pastaff .pavisage::before {
+content: "";
+position: absolute;
+left: 50%;
+bottom: 0;
+z-index: 1;
+transform: translateX(-50%);
+width: 30px;
+height: 10px;
+background-image: linear-gradient(45deg, #C5A96B, #997b2f);
+border-radius: 3px;
+}
+
+.pastaff .pavisage a {
+position: relative;
+z-index: 2;
+}
+
 /* LIENS D'ACTION -----------------------------------------------------------
    "Lire la suite", "Rejoindre ?" et "En savoir +" partagent une seule
    apparence, et c'est elle qui les distingue de .reflet : le doré animé de
@@ -1375,6 +1415,19 @@ text-align: center;
    que ci-dessus, sans quoi le text-align:center l'emporterait. */
 .pabody a.paplus-droite {
 text-align: right;
+}
+
+/* "Lire la suite" et "En savoir plus" tombaient à des hauteurs différentes
+   selon la longueur du texte au-dessus d'eux. Les deux colonnes de la
+   ligne du haut ont déjà la même hauteur totale (voir .parow-haut >
+   .pacol) : sortir le lien du flux pour l'épingler à ce bas commun les
+   aligne quel que soit le texte, sans toucher à .paplus ailleurs dans la
+   PA. */
+.parow-haut > .pacol > a.paplus-droite {
+position: absolute;
+right: 0;
+bottom: 0;
+margin-top: 0;
 }
 
 /* --- Affiliation --- */
