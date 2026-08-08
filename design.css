@@ -189,6 +189,16 @@ margin-bottom: 4px;
 float: left;
 }
 
+.linemid {
+display: block;
+height: 1px;
+width: 60%;
+margin: auto;
+margin-top: 13px;
+margin-bottom: 0px;
+background-color: #424242;
+}
+
 .infosplay {
 display: inline-block;
 vertical-align: top;
