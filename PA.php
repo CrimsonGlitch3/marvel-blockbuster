@@ -21,17 +21,23 @@
 
 		<div class="pacol">
 			<div class="pasub">L'univers</div>
-			<div class="patexte">Forum dérivé des films, séries et comics <span class="reflet">Marvel</span>. Les personnages inventés ne sont pas autorisés. <f>Forum éphémère</f> Trente jours, une histoire, une fin. C'est maintenant ou jamais ! <f>Priorité à l'action</f> Fiches courtes, RP courts, animations en continu.</div>
+			<div class="patexte">Forum dérivé des films, séries et comics <span class="reflet">Marvel</span>. Les personnages inventés ne sont pas autorisés.</div>
+			<div class="patexte paligne"><f>Forum éphémère</f> Trente jours, une histoire, une fin. C'est maintenant ou jamais !</div>
+			<div class="patexte paligne"><f>Priorité à l'action</f> Fiches courtes, RP courts, animations en continu.</div>
 		</div>
 
 	</div>
 
-	<!-- ///// LIGNE 2 : actu + staff + à l'honneur + affiliation ///// -->
+	<!-- ///// LIGNE 2 : affiliation + staff + actu + à l'honneur ///// -->
 	<div class="parow">
 
-		<div class="pacol pacol-large">
-			<div class="pasub">L'actu</div>
-			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
+		<div class="pacol pacol-affil">
+			<div class="pasub">Affiliation</div>
+			<div class="pacontenu paaffil">
+				<a href="https://www.pub-rpg-design.com/">PRD</a>
+				<a href="https://marvel-blockbuster.forumactif.com/t17-topsites">Topsites</a>
+				<a href="https://marvel-blockbuster.forumactif.com/f10-hors-du-forum">Partenaires</a>
+			</div>
 		</div>
 
 		<div class="pacol">
@@ -46,6 +52,11 @@
 			</div>
 		</div>
 
+		<div class="pacol pacol-large">
+			<div class="pasub">L'actu</div>
+			<div class="pacontenu paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
+		</div>
+
 		<div class="pacol">
 			<div class="pasub">À l'honneur</div>
 			<div class="pacontenu">
@@ -55,15 +66,6 @@
 					<div class="pavisage"><a href=""><img src="https://i.imgur.com/jnvSnnS.png" alt="" /></a></div>
 				</div>
 				<a class="paplus" href="">En savoir +</a>
-			</div>
-		</div>
-
-		<div class="pacol pacol-affil">
-			<div class="pasub">Affiliation</div>
-			<div class="pacontenu paaffil">
-				<a href="https://www.pub-rpg-design.com/">PRD</a>
-				<a href="https://marvel-blockbuster.forumactif.com/t17-topsites">Topsites</a>
-				<a href="https://marvel-blockbuster.forumactif.com/f10-hors-du-forum">Partenaires</a>
 			</div>
 		</div>
 

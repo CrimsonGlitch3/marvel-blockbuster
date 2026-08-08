@@ -1237,11 +1237,11 @@ gap: 40px;
 /* Double classe sur la colonne large : .parow-haut > .pacol la vise aussi,
    à spécificité strictement égale, et l'emporterait par l'ordre du fichier. */
 .parow-haut > .pacol.pacol-large {
-flex: 37 1 0;
+flex: 35 1 0;
 }
 
 .parow-haut > .pacol {
-flex: 25 1 0;
+flex: 27 1 0;
 }
 
 /* L'affiliation ne prend pas une part entière : trois mots empilés n'en ont
