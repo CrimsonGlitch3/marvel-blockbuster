@@ -1392,9 +1392,14 @@ opacity: 1;
    décalé se serait vu à côté d'elle plutôt que derrière. L'avatar, en
    transparence, se pose dessus sans laisser deviner de joint entre les
    deux. Un seul jeu de règles pour les deux rubriques : elles partagent
-   déjà .pavisage/.pavisages, inutile de dupliquer par rubrique. */
+   déjà .pavisage/.pavisages, inutile de dupliquer par rubrique.
+   overflow: hidden + le même border-radius que ::before : sans ça, l'image
+   (rectangle net) dépassait des coins arrondis du fond posé derrière elle.
+   Ce n'est pas l'image qu'on rogne, c'est la boîte qui l'encadre. */
 .pavisage {
 position: relative;
+overflow: hidden;
+border-radius: 8px;
 }
 
 .pavisage::before {
