@@ -1244,11 +1244,18 @@ flex: 37 1 0;
 flex: 25 1 0;
 }
 
-/* L'affiliation se réduit à la largeur de son plus long lien : trois mots
-   empilés n'ont pas besoin d'une part entière, et la place rendue profite
-   aux trois autres rubriques de la ligne. */
+/* L'affiliation ne prend pas une part entière : trois mots empilés n'en ont
+   pas besoin, et la place rendue profite aux trois autres rubriques.
+   72px est la largeur de son intitulé en American Captain — c'est lui le
+   plus large, pas "Partenaires" (62px).
+
+   Largeur figée et non "flex: 0 0 auto" : au premier chargement, American
+   Captain n'est pas encore arrivée et "AFFILIATION" se mesure en Arial de
+   repli, soit 116px. Toute la ligne se réorganisait donc sous les yeux du
+   visiteur au moment où la police prenait le relais.
+   À revoir si l'intitulé change : un libellé plus long serait rogné. */
 .pacol-affil {
-flex: 0 0 auto;
+flex: 0 0 72px;
 }
 
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
