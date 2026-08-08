@@ -1210,7 +1210,7 @@ gap: 20px;
 }
 
 .parow + .parow {
-margin-top: 14px;
+margin-top: 24px;
 }
 
 .pacol {
@@ -1224,6 +1224,31 @@ flex: 2 1 0;
 text-align: justify;
 }
 
+/* LIGNE DU HAUT ------------------------------------------------------------
+   Deux colonnes seulement, mais calées sur la grille de la ligne du bas :
+   "L'univers" doit démarrer exactement où démarre "À l'honneur".
+
+   En bas, cette troisième colonne commence après 3 parts et 2 gouttières,
+   soit 3(L − 3×20)/5 + 2×20 = 0,6 L + 4 sur une largeur utile L. La colonne
+   de droite vaut donc L − (0,6 L + 4) = 0,4 L − 4, et celle de gauche ce qui
+   reste une fois retirée la gouttière élargie : 0,6 L + 4 − 40.
+
+   Largeurs en pourcentage et non en pixels : elles suivent la largeur utile,
+   et l'alignement tient si le retrait latéral de .pabody change. */
+.parow-haut {
+gap: 40px;
+}
+
+/* Double classe sur la colonne large : .parow-haut > .pacol la vise aussi,
+   à spécificité strictement égale, et l'emporterait par l'ordre du fichier. */
+.parow-haut > .pacol.pacol-large {
+flex: 0 0 calc(60% - 36px);
+}
+
+.parow-haut > .pacol {
+flex: 0 0 calc(40% - 4px);
+}
+
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
    ni souligné — posé sur le fond de la page, centré au-dessus de sa
    colonne. */
@@ -1233,7 +1258,7 @@ text-align: justify;
    tout ce qui le suit — c'est à surveiller si l'un d'eux est rallongé. */
 .pasub {
 display: block;
-margin-bottom: 8px;
+margin-bottom: 4px;
 color: #c7a346;
 font-family: 'American Captain', arial;
 font-weight: bolder;

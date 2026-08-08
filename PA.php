@@ -11,11 +11,11 @@
 	</div>
 
 	<!-- ///// LIGNE 1 : contexte + univers ///// -->
-	<div class="parow">
+	<div class="parow parow-haut">
 
 		<div class="pacol pacol-large">
 			<div class="pasub">Le contexte</div>
-			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; ils avaient tort. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement, à l'abri de serveurs dont personne ne connaissait l'existence. Aujourd'hui Ultron est presque prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <b>30 jours pour sauver le monde.</b> <a href="t22-le-contexte">Lire la suite</a>.
+			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement... Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span> <a href="t22-le-contexte">Lire la suite</a>.
 		</div>
 
 		<div class="pacol">
@@ -30,7 +30,7 @@
 
 		<div class="pacol pacol-large">
 			<div class="pasub">L'actu</div>
-			<div class="paactu"><f>08/08</f> Ouverture du forum ! Vous pouvez dès maintenant vous inscrire et lancer vos fiches de présentation. Première version du forum par <i>heretics</i>. Le lancement de l'Acte 1 est immiment !</div>
+			<div class="paactu"><f>08/08</f> Ouverture du forum ! Première version du forum par <i>heretics</i>. Le lancement de <span class="reflet">l'Acte 1</span> est immiment !</div>
 		</div>
 
 		<div class="pacol">
