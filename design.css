@@ -523,11 +523,25 @@ margin-right: 15px;
 width: 40px;
 }
 
+/* Centrage vertical du contenu des forums (td.row1.over).
+   La hauteur de la ligne est dictée par ce bloc lui-même : au-dessus du titre
+   il n'y avait que 9px (2px de padding de cellule + 5px de margin-top du
+   .forumlink + 2px de son padding) contre 27px sous les sous-forums (10px de
+   padding-bottom + 15px de margin-bottom + 2px de padding de cellule), d'où le
+   contenu visuellement collé en haut. On ramène le bas à 9px lui aussi.
+   vertical-align:middle (qui écrase l'attribut valign="top" du gabarit) sert
+   de filet pour les lignes dont la hauteur est imposée par la cellule
+   « dernier message » plutôt que par la description. */
+td.row1.over {
+vertical-align: middle;
+}
+
 .forumdesc {
 text-align:justify;
-margin-bottom: 15px;
+margin-bottom: 0;
 padding: 10px;
 padding-top: 5px;
+padding-bottom: 7px;
 padding-right: 60px;
 }
 
@@ -1126,7 +1140,7 @@ margin: 0 auto 20px;
 /* Retrait latéral : sans cadre autour, le texte tombait sur les bords de la
    page. Le padding est intérieur (box-sizing) pour que la PA reste alignée
    sur le QEEL et les tables de forums, qui font 780px hors tout. */
-padding: 0 30px;
+padding: 0 60px;
 box-sizing: border-box;
 color: #827E7E;
 font-family: verdana, arial;
@@ -1204,17 +1218,31 @@ text-align: justify;
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
    ni souligné — posé sur le fond de la page, centré au-dessus de sa
    colonne. */
+/* min-height à deux lignes, texte centré dedans : "Membres de la semaine"
+   ne tient pas sur une ligne dans une colonne étroite, et sans hauteur
+   commune son intitulé poussait ses vignettes 22px plus bas que celles du
+   staff. La réserve vaut pour tous les intitulés, quel que soit leur
+   libellé — un titre rallongé plus tard ne décalera rien. */
 .pasub {
-display: block;
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 44px;
 margin-bottom: 6px;
 color: #c7a346;
 font-family: 'American Captain', arial;
 font-weight: bolder;
-font-size: 14px;
-line-height: 18px;
+font-size: 18px;
+line-height: 22px;
 letter-spacing: .5px;
 text-align: center;
 text-transform: uppercase;
+}
+
+/* L'actu au fer à gauche : sa colonne est justifiée (.pacol-large), mais
+   une brève de deux lignes justifiée écarte visiblement les mots. */
+.paactu {
+text-align: left;
 }
 
 /* Une date par ligne, l'étiquette dorée <f> servant de puce */
@@ -1280,9 +1308,12 @@ text-align: center;
 text-align: center;
 }
 
+/* Trois liens l'un sous l'autre, sans gras : empilés et dorés, ils se
+   repèrent déjà sans qu'il faille les appuyer. */
 .paaffil a {
 display: block;
 line-height: 15px;
+font-weight: normal;
 }
 
 /* DEBUT SELECTOR */
@@ -1484,7 +1515,8 @@ border-top-color: #3a352c;
 }
 
 /* REFLET DORÉ ANIMÉ ------------------------------------------------------
-   Appliqué au pseudo du groupe PNJ (group-6) et au titre .titrehaut.
+   Appliqué au pseudo du groupe PNJ (group-6), au titre .titrehaut et à
+   .reflet, la classe à poser à la main sur un passage de texte.
 
    Ciblage par la classe de groupe plutôt que par la couleur inline : la
    règle survit à un changement de couleur du groupe dans le panneau
@@ -1494,7 +1526,8 @@ border-top-color: #3a352c;
    .profilpseudo .usr_grp_clr dans les profils à côté des messages. */
 span.group-6,
 .profilpseudo span.group-6,
-.titrehaut {
+.titrehaut,
+.reflet {
     /* Teintes relevées au pixel dans le logo BLOCKBUSTER du bandeau :
        bronze #755811 en bas des lettres, or dominant #CDA32D en haut.
        Le plancher est remonté à #8F6E1A pour rester lisible sur le fond
@@ -1525,10 +1558,23 @@ span.group-6,
 
 /* inline-block réservé au pseudo : c'est un <span> inline, et le dégradé sur
    texte s'y comporte mal sans. .titrehaut est un bloc centré par text-align,
-   que inline-block ferait au contraire coller à gauche. */
+   que inline-block ferait au contraire coller à gauche.
+   .reflet non plus : elle habille un passage au fil du texte, qu'un
+   inline-block empêcherait de se couper en fin de ligne — c'est
+   box-decoration-break: clone qui lui fait tenir le dégradé sur plusieurs
+   lignes, comme pour .focus. */
 span.group-6,
 .profilpseudo span.group-6 {
     display: inline-block;
+}
+
+/* Passage en gras porté par le reflet animé. Le gras est ici parce que le
+   dégradé sur texte tient mal sur des jambages fins : sans lui, le reflet
+   est à peine visible. */
+.reflet {
+    font-weight: bold;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 /* alternate + ease-in-out : le reflet va et vient au lieu de boucler, ce qui
@@ -1542,7 +1588,8 @@ span.group-6,
 @media (prefers-reduced-motion: reduce) {
     span.group-6,
     .profilpseudo span.group-6,
-    .titrehaut {
+    .titrehaut,
+    .reflet {
         animation: none;
         background-position: 50% 50%;
     }
