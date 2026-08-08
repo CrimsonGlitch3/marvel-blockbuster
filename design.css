@@ -1262,18 +1262,28 @@ padding-bottom: 20px;
    donnerait donc pas la même largeur en pixels.
    flex: 0 0 (et non flex: 2 1 0 comme avant) : la colonne ne doit ni
    grandir ni rétrécir, elle doit rester à 270px pile.
-   Affiliation, Staff et À l'honneur se partagent alors le reste à égalité
-   via le flex: 1 1 0 par défaut de .pacol — inutile de leur épingler une
-   largeur chacune.
+   Staff et À l'honneur se partagent alors le reste à égalité via le
+   flex: 1 1 0 par défaut de .pacol — inutile de leur épingler une largeur
+   chacune. Affiliation, elle, est épinglée à part : voir .pacol-affil.
 
    margin-left : la gouttière du bas est à 20px partout (.parow), mais
    entre À l'honneur et l'actu on veut la même respiration qu'en ligne du
    haut (40px). Le gap de .parow s'applique à tout le rang ; on ajoute donc
    20px en plus juste ici plutôt que de casser l'espacement uniforme des
-   trois premières colonnes. */
+   colonnes qui la précèdent. */
 .pacol-actu {
 flex: 0 0 270px;
 margin-left: 20px;
+}
+
+/* Affiliation n'a besoin que de trois mots empilés : à largeur libre elle
+   prendrait la même part que Staff et À l'honneur, bien plus que ce que
+   son contenu réclame. 95px fixe, et non flex: 0 0 auto : ce dernier
+   mesurerait la colonne sur "AFFILIATION" en repli Arial avant l'arrivée
+   d'American Captain, plus large que la police définitive — même piège
+   que celui qui avait justifié l'ancien pacol-affil à 72px. */
+.pacol-affil {
+flex: 0 0 95px;
 }
 
 /* Intitulé de rubrique : mêmes capitales dorées que .qeelsub, mais ni fond
@@ -1365,31 +1375,32 @@ transition: all .3s ease-in;
 opacity: 1;
 }
 
-/* Bandeau doré derrière l'avatar du staff, même dégradé que <f>. Posé en
-   bas et plus étroit que l'avatar, il reste visible tout autour ; l'avatar
-   (position + z-index au-dessus) le dépasse par le haut, comme un
-   médaillon qui repose sur son socle plutôt qu'une simple vignette. */
+/* Fond doré derrière l'avatar du staff : mêmes teintes et angle que
+   .focus, mais animé comme .reflet (même @keyframes, plus bas dans ce
+   fichier). inset: 0 cale le fond exactement sur la boîte de l'image —
+   .pavisage n'a pas d'autre contenu ni de padding, sa largeur est donc
+   déjà celle de l'image — sans quoi un fond plus étroit ou décalé se
+   serait vu à côté d'elle plutôt que derrière. L'avatar, en transparence,
+   se pose dessus sans laisser deviner de joint entre les deux. */
 .pastaff .pavisage {
 position: relative;
-padding-bottom: 6px;
 }
 
 .pastaff .pavisage::before {
 content: "";
 position: absolute;
-left: 50%;
-bottom: 0;
+inset: 0;
 z-index: 1;
-transform: translateX(-50%);
-width: 30px;
-height: 10px;
 background-image: linear-gradient(45deg, #C5A96B, #997b2f);
+background-size: 220% 100%;
 border-radius: 3px;
+animation: pseudo-reflet 3s ease-in-out infinite alternate;
 }
 
 .pastaff .pavisage a {
 position: relative;
 z-index: 2;
+display: block;
 }
 
 /* LIENS D'ACTION -----------------------------------------------------------
@@ -1718,7 +1729,8 @@ span.group-6,
     span.group-6,
     .profilpseudo span.group-6,
     .titrehaut,
-    .reflet {
+    .reflet,
+    .pastaff .pavisage::before {
         animation: none;
         background-position: 50% 50%;
     }

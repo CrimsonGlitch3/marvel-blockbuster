@@ -15,7 +15,7 @@
 
 		<div class="pacol pacol-large">
 			<div class="pasub">Le contexte</div>
-			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement, à l'abri de serveurs dont personne ne connaissait l'existence. Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span>
+			<f>New York, 2026</f> Il y a une dizaine d'années, les Avengers ont détruit Ultron au-dessus de la Sokovie. Ils y ont cru&nbsp;; <b>ils avaient tort</b>. Quelques lignes de code ont survécu à la chute et sont parvenues à se glisser dans le réseau internet. Depuis, l'IA n'a rien fait d'autre que se reconstruire lentement, à l'abri de serveurs secrets. Aujourd'hui Ultron est prêt à relancer sa domination mondiale, et New York est le premier domino qui doit tomber pour que tout le reste suive. Il vous reste <span class="reflet">30 jours pour sauver le monde.</span>
 			<a class="paplus paplus-droite" href="t22-le-contexte">Lire la suite →</a>
 		</div>
 
@@ -33,7 +33,7 @@
 	<!-- ///// LIGNE 2 : affiliation + staff + actu + à l'honneur ///// -->
 	<div class="parow">
 
-		<div class="pacol">
+		<div class="pacol pacol-affil">
 			<div class="pasub">Affiliation</div>
 			<div class="pacontenu paaffil">
 				<a href="https://www.pub-rpg-design.com/">PRD</a>
